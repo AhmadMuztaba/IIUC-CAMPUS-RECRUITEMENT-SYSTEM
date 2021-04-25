@@ -1,0 +1,49 @@
+const mongoose=require('mongoose');
+const CompanyProfileSchema=new mongoose.Schema({
+    company:{
+        type:mongoose.Schema.Types.ObjectId,
+        unique:true,
+        ref:'Company',
+    },
+    established:{
+        type:String,
+    },
+    mission:{
+     type:String,
+    },
+    vision:{
+        type:String,
+    },
+    About:{
+        type:String,
+    },
+    website:{
+        type:String
+    },
+    social:{
+        facebook:{
+            type:String,
+        },
+        instagram:{
+            type:String,
+        },
+        twitter:{
+            type:String,
+        },
+        linkedin:{
+            type:String
+        },
+        youtube:{
+            type:String
+        },
+    },
+    currentEmployeeNumber:{
+        type:Number
+    },
+    logo:{
+        type:Buffer
+    },
+},{timestamps:true});
+
+const CompanyProfile=new mongoose.model('CompanyProfile',CompanyProfileSchema);
+module.exports=CompanyProfile;
