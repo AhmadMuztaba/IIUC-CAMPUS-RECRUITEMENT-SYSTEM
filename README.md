@@ -1,30 +1,6 @@
 # IIUC Campus Recruitement System
 A backend NodeJs demo project for my varsity final exam . 
 
-Documentation:
-
-for User
-https://documenter.getpostman.com/view/14944044/TzJoDfdQ
-
-for User-Profile
-https://documenter.getpostman.com/view/14944044/TzJoDfdR
-
-for Alumni
-https://documenter.getpostman.com/view/14944044/TzJoDfZ2
-
-for Alumni-Profile
-https://documenter.getpostman.com/view/14944044/TzJoDfhm
-
-for Company
-https://documenter.getpostman.com/view/14944044/TzJoDfhp
-
-for Company-Profile
-https://documenter.getpostman.com/view/14944044/TzJoDfhq
-
-for Admin
-https://documenter.getpostman.com/view/14944044/TzJoDfn7
-
-
 #ERD Diagram
 [
 ![ERD](https://user-images.githubusercontent.com/57172007/113723620-591a4a00-9713-11eb-835b-8817bf0cd2be.png)
