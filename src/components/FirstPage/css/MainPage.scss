@@ -1,0 +1,101 @@
+#particles-js{
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(to right bottom,#051e25e3 40%,#200a20bd),url(../images/3.jpg);
+    background-size: cover;
+     height: 100vh;
+     width: auto;
+ }
+ .mainpage{
+     position: absolute;
+     display: flex;
+     padding: 2%;
+     justify-content: center;
+     align-items: center;
+     
+     &__leftside{
+         flex: 0 0 45%;
+         &--heading{
+            color:#be870b;
+         }
+       
+     }
+     &__rightside{
+         padding: 2%;
+         height: 45rem;
+         width: auto;
+         background-image:linear-gradient(to right bottom,#1a3641b9 40%,#200a2088),url('../images/best-subtle-black-white-background-textures-368x246.jpg');
+         box-shadow: 1.5rem 1.5rem #02443e;
+         &--heading{
+             font-size: 3.7rem;
+            color: #9e9c8e;
+         }
+         &--paragraph{
+            color: #eee;
+            font-size: 2.2rem;
+            font-family: cursive;
+            letter-spacing: .5rem;
+            line-height: 1.5;
+            margin: 1rem;
+            margin-bottom: 3.5rem;
+         }
+     }
+     &__buttons{
+         display: flex;
+         justify-content: center;
+         &--join{
+             cursor: pointer;
+            background-color: #870831;
+            border-radius: 2.5rem;
+            border:none;
+            font-size: 1.9rem;
+            height: 7rem;
+            width: 12rem;
+           padding: 1%;
+            color: #fff;
+            margin-right: 1rem;
+         }
+         &--login{
+             cursor: pointer;
+            font-size: 1.9rem;
+            height: 7rem;
+            width: 12rem;
+           padding: 1%;
+            background-color: #A3A847;
+            border-radius: 2.5rem;
+            border:none;
+            color: #fff;
+         }
+     }
+     &__joinus,&__signin{
+         display: flex;
+         justify-content: center;
+         margin-top: 2rem;
+         &--each{
+             font-family: cursive;
+             border-radius: 3.5rem;
+             color: white;
+             height: 18rem;
+             width: 15rem;
+             padding: 2rem;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             margin-right: 1.5rem;
+             font-size: 2.2rem;
+             background-image:linear-gradient(to right bottom,#1a3641ec 40%,#200a20a4),url(../images/pngtree-pastel-colorful-background-clouds-image_312444.jpg);
+             background-size: cover;
+             animation: util 1s;
+         }
+     }
+ }
+
+
+ @keyframes util{
+     0%{
+         transform: scale(0);
+     }
+     100%{
+         transform: scale(1);
+     }
+ }

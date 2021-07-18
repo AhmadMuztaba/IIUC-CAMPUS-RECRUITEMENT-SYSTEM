@@ -1,0 +1,50 @@
+.TextArea{
+    resize: none;
+    line-height: 150%;
+    text-align: center;
+    vertical-align: middle;
+    border:none;
+    font-size: 200%;
+    outline:none;
+    padding:3%;  
+    margin: 45px;
+    margin-top: 0px;
+    width: 60vw;
+    height: 135px;
+    border-bottom: none;
+    margin-bottom: 0px;
+}
+.ShowDashboard-input {
+   border-radius: 20px;
+   width:  60vw;
+   font-size: 150%;
+   display: block;
+   margin:35px;
+   padding: 3%;
+   outline: none;
+   border:1px solid black;
+}
+
+.TextArea::placeholder{
+    border: none;
+   font-size: 100%;
+   text-align: center;
+   outline:none;
+}
+
+.textarea-buttons{
+    font-size: 180%;
+    padding: 2%;
+    margin-left: 300px;
+}
+.textarea-buttons ion-icon{
+    margin: 10px;
+}
+.textAreaAndButtonWrapper{
+    border: 1px solid black; 
+    border-radius: 10px;
+    /* margin: 40px; */
+    margin-left: 30px;
+    width: 65vw;
+    box-shadow: 20px 20px #968c8396;
+}

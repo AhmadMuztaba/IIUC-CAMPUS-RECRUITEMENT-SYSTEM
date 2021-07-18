@@ -1,0 +1,7 @@
+.Modal{
+    background-color: rgba(0,0,0,0.3);
+    height: 90vh;
+    width: 93vw;
+    margin: 0px 0px;
+    overflow:scroll;
+}

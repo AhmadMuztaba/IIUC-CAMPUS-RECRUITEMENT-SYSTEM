@@ -1,0 +1,32 @@
+.search{
+    text-align: center;
+    margin-left: 200px;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    height: 100px;
+    width: 700px;
+    font-size: 100%;
+    border: 0.5px solid #e4e7ec;
+    box-shadow: 0.7px 1.5px rgb(0, 0, 0 ,0.1);
+    outline: none;
+}
+
+.show-User{
+    text-align: center;
+    
+}
+.EveryUser{
+    text-decoration: none;
+    font-size: 120%;
+    margin-left: 20px;
+    margin: 0 auto;
+    padding: 2%;
+    width: 550px;
+    margin-bottom: 10px;
+    background-color: rgb(242, 245, 255);
+    font-weight: 400;
+    color:rgb(99, 99, 91)
+}
+.show-User a{
+    color:rgb(99, 99, 91)
+}

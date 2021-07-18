@@ -1,0 +1,60 @@
+.ShowUserBlogById{
+    display:grid;
+    grid-template-columns: 1fr 8fr;
+}
+.ShowUserBlogById-home{
+    height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.ShowUserBlogById h1{
+    font-size: 110%;
+}
+.ShowUserBlogById-comment-icon{
+    /* margin-top: 65vh; */
+    color: #2f5d62;
+    margin-top: 30px;
+    margin-left: 45px;
+    font-size: 230%;
+}
+/* .ShowUserBlogById-image{
+    height:45vh;
+    margin-left: 60px ;
+    width: 70vw;
+    border: 1px solid black;
+} */
+.ShowUserBlogById-info{
+    height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.ShowUserBlogById-BlogImage{
+    margin-left: 85px ;
+    height: 61vh;
+    width: 70vw;
+    background-attachment: fixed;
+}
+.ShowUserBlogById-title{
+    margin-top: 30px;
+    margin-bottom: 20px;
+   }
+.ShowUserBlogById-title h1{
+ font-size: 160%;
+}
+.ShowUserBlogById-description{
+    margin-left: 70px;
+    margin-top: 40px;
+    padding: 2%;
+}
+.ShowUserBlogById-description p{
+    font-size: 110%;
+    font-weight: 300;
+    line-height: 1.5em;
+}
+.loadingImage{
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+

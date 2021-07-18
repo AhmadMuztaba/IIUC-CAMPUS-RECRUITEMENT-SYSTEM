@@ -1,0 +1,36 @@
+.Dashboard-grid{
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+}
+.Dashboard-info{
+    padding-right: 30px;
+    height: 100vh;
+    overflow:scroll;
+    overflow-x: hidden;
+    position: sticky;
+    scrollbar-width: none;
+}
+.Dashboard-info div:first-child{
+    height:40vh;
+    margin-bottom: 20px;
+ }
+.Dashboard-info div{
+    height:20vh;
+ }
+ .Side-Option-selected-color{
+    background-color: #d9dab0;
+    transition: background-color 0.7s;
+ }
+ /*rgb(249, 248, 113)*/
+ .Side-Option-hover-color{
+    cursor: pointer;
+    background-color: #a3d2ca;
+    border-color: transparent;
+    font-weight: 400;
+ }
+ .show-Dashboard{
+    margin: 0 auto;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+ }
