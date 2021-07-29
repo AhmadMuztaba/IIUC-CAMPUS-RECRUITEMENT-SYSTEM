@@ -7,7 +7,7 @@ import Dashboard from './Dashboard';
 import './CSS/createprofile.scss';
 import Loader from '../../utility/Loader';
 class CreateProfile extends React.Component {
-    state = { button: true }
+    state = { button: true,skillshow:false}
     componentDidMount() {
         this.props.UserOwnProfile();
     }
@@ -108,25 +108,26 @@ class CreateProfile extends React.Component {
                <div>
                <input className="createProfile__inputtextstyle" {...input} type={type} autoComplete="off" />
                </div>
-                
                 {this.renderError(meta)}
             </div>
         )
     }
 
-    renderCheck=({ input, label, meta, type })=>{
+    renderCheck=({ input, label, meta, type})=>{
         if (this.props.userProfile) {
             return (<Dashboard/>)
         }
         return (
             <div >
                 <div>
-                <label>{label}</label>
+                <div className="utility__flex">
+                <label htmlFor={label} className="createProfile__checkboxinput--label">{label}</label>
                 </div>
-               <div>
-               <input {...input} type={type} />
+               <input id={label} className="createProfile__checkboxinput" {...input} type={type} />
+               <label htmlFor={label} className="createProfile__customisedInput">
+               <div className="createProfile__customisedInput--checked"></div>
+               </label>
                </div>
-                
                 {this.renderError(meta)}
             </div>
         )
@@ -185,7 +186,6 @@ class CreateProfile extends React.Component {
             newskills.push("Robotics");
         }
         let skills=newskills.toString();
-        console.log(skills);
         const values = { ...formValues, skills };
         this.props.CreateOwnProfile(values);
 
@@ -221,8 +221,7 @@ class CreateProfile extends React.Component {
                     <Field name="company" type="text" component={this.renderInput} label="Company" />
                     <Field name="location" type="text" component={this.renderInput} label="location" />
                     <div>Status</div>
-                    <Field name="status"component={this.renderSelect} label="status" />
-                   
+                    <Field name="status"component={this.renderSelect} label="status" /> 
                     <Field name="bio" type="text" component={this.renderInput} label="bio" />
                     <Field name="githubUserName" type="text" component={this.renderInput} label="GitHub Name" />
                     <Field name="codeforceUserName" type="text" component={this.renderInput} label="CodeForce Name" />
@@ -231,20 +230,30 @@ class CreateProfile extends React.Component {
                     <Field name="twitter" type="text" component={this.renderInput} label="Twitter" />
                     <Field name="youtube" type="text" component={this.renderInput} label="Youtube" />
                     <Field name="instagram" type="text" component={this.renderInput} label="Instagram" />
-                    <div>Skills</div>
-                    <div className="createProfile__checkbox">
-                    {
-                       this.skills.map((skill)=>{
-                        return(<Field name={skill.name} type="checkbox" component={this.renderCheck} label={skill.name} value={skill.name} />)
-                       })
-                   }
+                    <div className="createProfile__checkbox--label">
+                        <div>Skills</div>
+                        <div className="createProfile__checkbox--label-icon" onClick={()=>{
+                            this.setState({skillshow:!this.state.skillshow})
+                        }}><ion-icon name="caret-down-circle-outline"></ion-icon></div>
                     </div>
                     {
-                        this.state.button ? <button type="submit">Add</button> : <button disabled >Submitting</button>
+                        this.state.skillshow?(
+                            <div className="createProfile__checkbox">
+                            {
+                               this.skills.map((skill)=>{
+                                return(<Field name={skill.name} type="checkbox" component={this.renderCheck} label={skill.name} value={skill.name} />)
+                               })
+                           }
+                            </div>
+                        ):null
                     }
+                    <div className="createProfile__btn">
+                    {
+                        this.state.button?<button type="submit" className="createProfile__btn--add">Add</button> : <button disabled className="createProfile__btn--add">Submitting</button>
+                    }
+                    </div>
                 </form>
                     </div>
-                
                 </div>
             )
         }
@@ -260,9 +269,9 @@ class CreateProfile extends React.Component {
 
 const validate = (formValue) => {
     const error = {};
-    // if (!formValue.status) {
-    //     error.status = "needed"
-    // }
+    if (!formValue.status) {
+        error.status = "needed"
+    }
     if(!formValue.status){error.status="select options"}
     if (!formValue.bio) {
         error.bio = "bio needed"

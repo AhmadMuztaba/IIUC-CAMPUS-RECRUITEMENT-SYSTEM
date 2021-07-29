@@ -1,0 +1,40 @@
+@import '../../../mixin.scss';
+.social{
+    @include respond(tab-port){
+        display: none;
+    }
+    margin-right: 4rem;
+    display: flex;
+    flex-direction: column;
+
+    &__icons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        width: 7rem;
+        background-color: #fff5c0;
+        margin-bottom: .3rem;
+        transition: all .5s;
+        &:hover{
+            transform: scale(1.25);
+        }
+
+        & a{
+            text-decoration: none;
+        }
+        &--facebook{
+            color: #3b5998
+        }
+
+        &--instagram{
+            color: rgb(193,53,132);
+        }
+        &--twitter{
+            color: #00acee;
+        }
+        &--github{
+            color: #333;
+        }
+    }
+}

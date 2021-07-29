@@ -42,7 +42,7 @@ class Image extends Component {
             </div>)
         }
         else if (!this.props.profile) {
-            return (<div>
+            return (<div className="Dashboard-slidebar-image">
                 <input type="file" ref={fileInput=>this.fileInput=fileInput} style={{ display: 'none' }} required name="profilePic" onChange={this.fileUploadHandler} />
                 <button onClick={() => { this.fileInput.click() }}>Select</button>
                 {this.state.button? <button type="submit" onClick={this.uploadFile}>upload</button> : <button disabled>Uploading</button>}

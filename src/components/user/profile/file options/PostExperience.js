@@ -3,18 +3,17 @@ import {connect} from 'react-redux';
 import {addExperience} from '../../../actions/user/index';
 import {} from '../../../actions/Type';
 import {Field,reduxForm} from 'redux-form';
-import '../../../Error/css/Error.css';
 class PostExperience extends React.Component{
   state={button:true}
   renderError=({error,touched})=>{
     if(error&&touched){
-      return <div className="Normal-Error">{error}</div>;
+      return <div className="createProfile__error">{error}</div>;
     }
   }
   renderInput=({label,input,meta,type})=>{
   return(<div>
     <label>{label}</label>
-    <input type={type} {...input} />
+    <input className="education_input" type={type} {...input} />
     {this.renderError(meta)}
   </div>)
   }
@@ -27,7 +26,7 @@ class PostExperience extends React.Component{
     },2500)
   }
     render(){
-      return(<div>
+      return(<div className="utility__flex">
         <form onSubmit={
           this.props.handleSubmit(this.onHandleSubmit)}>
         <Field  type="text" name="title" component={this.renderInput} label="title"/>
@@ -36,11 +35,11 @@ class PostExperience extends React.Component{
         <Field type="date" name="from"component={this.renderInput} label="from"/>
         <Field type="date" name="to"component={this.renderInput} label="to"/>
         <Field type="text" name="description"component={this.renderInput} label="description"/>
+        <div className="AboutSection__btn">
         {
-         this.state.button?<button type="submit" onClick={()=>{
-          
-         }}>Add</button>:<button disabled >Submitting</button>
-         }
+        this.state.button?<button type="submit" className="AboutSection__btn--add">Add</button> : <button disabled className="createProfile__btn--add">Submitting</button>
+        }
+        </div>
         </form>
         </div>)
     }

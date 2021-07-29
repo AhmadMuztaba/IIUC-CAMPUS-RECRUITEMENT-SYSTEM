@@ -1,0 +1,142 @@
+@import '../../../mixin.scss';
+
+.Dashboard{
+    &-utility{
+        flex: 0 0 25%;
+        @include respond(tab-port){
+            flex: 0 0 0;
+        }
+    }
+    &-flex{
+        display: flex;
+    @include respond(tab-port){
+        flex-direction: column;
+    }
+    padding-top: 4rem;
+    color: rgb(5, 5, 5);
+    border-top: 1.5rem solid #ebe8e8;
+    border-left: 1.5rem solid #ebe8e8;
+    border-right: 1.5rem solid #ebe8e8;
+    @include respond(tab-port){
+        border: none;
+        padding: 2rem;
+    }
+}
+    &-slidebar{
+        left: 4rem;
+    position: fixed;
+    padding-right: 2rem;
+    flex: 0 0 25%;
+    height: 90vh;
+    overflow-y: scroll;
+    @include respond(tab-port){
+        position: relative;
+        left: 0;
+        overflow: hidden;
+        padding-right: 0;
+        float: 0 0 20%;
+    }
+    @include respond(mobile){
+        margin:0 auto;
+    }
+        &-image{
+            @include respond(tab-port){
+                display: none;
+            }
+            height: 10rem;
+            display: flex;
+            margin-bottom: 3rem;
+            padding: 1%;
+            justify-content: center;
+            flex-direction: column;
+            &--pic{
+                height: 27rem;
+                width: 24rem;
+            }
+        }
+    }
+}
+.slidebar__option{
+    display: flex;
+    flex-direction: column;
+    @include respond(tab-port){
+        flex-direction: row;
+    }
+    align-items: center;
+    &--each{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        height: 15rem;
+        width: 27rem;
+        font-size: 2.5rem;
+        padding: 8%;
+        border-bottom: 0.5px solid rgb(216, 209, 209);
+        @include respond(tab-port){
+            padding: 3%;
+            width: 20rem;
+            border-bottom: 0;
+        }
+        @include respond(mobile){
+            height: 7rem;
+            width: 10rem;
+        }
+        position: relative;
+        &:first-child{
+            border-top:0.5px solid rgb(216, 209, 209);
+            @include respond(tab-port){
+                border-top: 0;
+            }
+        }
+        &:last-child{
+            margin-bottom: 1rem;
+            @include respond(tab-port){
+                margin-bottom: 0;
+            }
+        }               
+        &-icon{
+            position: absolute;
+            font-size: 2.1rem;
+            left: 3rem;
+            top: 2.5rem;
+            @include respond(tab-port){
+                left: 0.6rem;
+                top: 0.5rem;
+            }
+            @include respond(mobile){
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        &-name{
+            @include respond(mobile){
+                display: none;
+            }
+        }
+    }
+}
+.Side-Option-selected-color{
+    background-color: #f9f871 !important;
+    transition: background-color 0.7s;
+ }
+ .Side-Option-hover-color{
+    cursor: pointer;
+    background-color: #d9dab0 !important;
+    border-color: transparent;
+    font-weight: 400;
+ }
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+::-webkit-scrollbar-thumb {
+    background: rgb(224, 219, 219);
+  }
+ ::-webkit-scrollbar-thumb:hover {
+    background: rgb(216, 208, 208);
+  }

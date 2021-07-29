@@ -19,14 +19,17 @@ class PostGitHub extends Component {
             return null
         }
         return (
-            <div>
+            <div className="utility__flex">
                 <form onSubmit={this.onHandleSubmit}>
-                    <input type="text" name="githubusername" value={this.state.value} required={true} onChange={(e) => {
+                    <label>Github User Name</label>
+                    <input type="text" className="education_input" name="githubusername" value={this.state.value} required={true} onChange={(e) => {
                         this.setState({ value: e.target.value });
                     }} />
-                    {
-                        this.state.button ? <button type="submit">Add</button> : <button disabled >Submitting</button>
-                    }
+                    <div className="AboutSection__btn">
+        {
+        this.state.button?<button type="submit" className="AboutSection__btn--add">Add</button> : <button disabled className="createProfile__btn--add">Submitting</button>
+        }
+        </div>
                 </form>
             </div>
         );

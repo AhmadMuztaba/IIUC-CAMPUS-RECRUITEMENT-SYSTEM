@@ -44,9 +44,100 @@
                 font-size: 2rem;
                 transition: all .6s;
     }
-    &__checkbox{
-        width: 20rem;
-        display: flex;
-        flex-wrap: wrap;
+    &__checkboxinput{
+        display: none;
+        margin-left: 7rem;
+        margin-top: 7rem;
+        margin-bottom: 7rem;
+        align-items: center;
+        justify-content: center;
+        height: 5rem;
+        width: 5rem;
+        &--label{
+            margin-left: 7rem;
+            height: 11rem;
+            width: 10rem;
+        }
     }
+
+    &__checkboxinput:checked ~ &__customisedInput &__customisedInput--checked{
+        background-color:#8e1d1d;
+        transition: all .4s;
+    }
+    
+    &__checkbox{
+        margin-bottom: 5rem;
+        &--label{
+            margin: 3rem;
+            margin-left: 0;
+            margin-right: 0;
+            display: flex;
+            justify-content: space-between;
+            &-icon{
+                font-size: 7rem;
+            }
+        }
+        display: flex;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+        transition: all .4s;
+    }
+    &__customisedInput{
+        &--flex{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        margin-left: 8rem;
+        margin-right: rem;
+        margin-bottom: 5rem;
+        position: relative;
+        display: inline-block;
+        height: 5rem;
+        width: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #c86c82;
+        border-radius: 50%;
+        &--checked{
+            position: absolute;
+            display: inline-block;
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            background-color: beige;
+        }
+    }
+    &__btn{
+        display: flex;
+        justify-content: center;
+
+        &--add{
+            cursor: pointer;
+            height: 7rem;
+            width: 10rem;
+            border-radius: 3rem;
+            font-size: 2rem;
+            border: none;
+            transition: all .5s;
+            background-color: #eaba1b;
+            font-family: cursive;
+            font-weight: 600;
+           color: #055252;
+            &:hover{
+                background-color: brown;
+                color: white;
+
+            }
+        }
+    }
+}
+
+.utility__flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
