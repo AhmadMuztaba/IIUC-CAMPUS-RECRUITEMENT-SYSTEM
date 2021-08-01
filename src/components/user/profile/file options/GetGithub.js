@@ -10,11 +10,11 @@ class GetGithub extends Component {
         if (this.props.Repositories.length < 1) {
             return (<div>No repos found</div>)
         }
-        return (<div className="repo">
+        return (<div className="repository">
             <ul>
             {
                 this.props.Repositories.map((rep,index)=>{
-                    return(<li key={index}><a href={rep.html_url} style={{fontWeight:700}}>{rep.name}</a></li>);
+                    return(<li key={index}><a href={rep.html_url}>{rep.name}</a></li>);
                 })
          }
          </ul>

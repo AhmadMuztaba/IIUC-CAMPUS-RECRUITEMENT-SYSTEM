@@ -1,8 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import AboutMe from './file options/AboutMe';
 import WriteBlog from './file options/WriteBlog';
 import ShowUserBlog from './file options/ShowUserBlog';
 import ShowAlumniBlog from './file options/ShowAlumniBlog';
+import EditProfile from './EditProfile';
 import JobPost from './file options/JobPost';
 class ShowDashboard extends React.Component {
     render() {
@@ -25,6 +27,12 @@ class ShowDashboard extends React.Component {
         }
         else if (this.props.selected === 4) {
             return (<JobPost/>);
+        }
+        else if (this.props.selected === 5) {
+            return (<EditProfile/>);
+        }
+        else if(this.props.selected===7){
+            return 'Logging Out...';
         }
     }
 }

@@ -336,9 +336,9 @@ export const updateUserInfo = (info) => async (dispatch) => {
     },
   };
   SetToken(localStorage.getItem("userToken"));
-  const body = JSON.stringify(info);
+  console.log(info);
   try {
-    const response = await axios.patch("/profile/me", body, config);
+    const response = await axios.patch("/profile/me", info, config);
     dispatch({
       type: UPDATE_USER_PROFILE,
       payload: response.data,

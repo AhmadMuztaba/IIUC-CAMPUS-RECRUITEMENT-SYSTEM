@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { codeforceRatings } from '../../../actions/user/index';
 import { } from '../../../actions/Type';
+import '../CSS/AboutMe.scss';
 class GetCodeforce extends Component {
     componentDidMount() {
         this.props.codeforceRatings();
@@ -9,14 +10,15 @@ class GetCodeforce extends Component {
     render() {
         if (this.props.codeforce.result) {
             return(
-                <>
+                <div>
                     {
                         this.props.codeforce.result.reverse().map((contest,index)=>{
-                            if(index<5){
+                            if(index<1){
                                 return (
-                                    <div className="cf">
+                                    <div className="codeforce">
                                     <div>
-                                        <ul>
+                                            <div className="codeforce-rating">{contest.newRating}</div>  
+                                        {/* <ul>
                                             <li>
                                               <h4>Contest Id</h4>
                                             </li>
@@ -44,7 +46,7 @@ class GetCodeforce extends Component {
                                             </li>
                                             <li>
                                                 <h4 style={{color:'#d89216'}}>{contest.newRating}</h4></li>
-                                        </ul>
+                                        </ul> */}
                                     </div>
                                     </div>
                                 )
@@ -55,7 +57,7 @@ class GetCodeforce extends Component {
                             
                         })
                     }
-                </>
+                </div>
             )
        }else {
             return (<div>Loading</div>)

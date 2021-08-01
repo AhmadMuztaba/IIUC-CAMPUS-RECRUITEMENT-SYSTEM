@@ -21,6 +21,9 @@
         border: none;
         padding: 2rem;
     }
+    @include respond(mobile){
+        padding: .5rem;
+    }
 }
     &-slidebar{
         left: 4rem;
@@ -43,15 +46,36 @@
             @include respond(tab-port){
                 display: none;
             }
+            &--btn{
+                &--up{
+                    height: 5rem;
+                    margin: 1rem;
+                    width: 11rem;
+                    border: none;
+                    border-radius: 2rem;
+                    background-color: darkslategray;
+                    color: white;
+                }
+                &--sub{
+                    height: 4rem;
+                    width: 7rem;
+                    border:none;
+                    border-radius: 2rem;
+                }
+            }
             height: 10rem;
             display: flex;
             margin-bottom: 3rem;
             padding: 1%;
+            align-items: center;
             justify-content: center;
             flex-direction: column;
             &--pic{
+                @include respond(tab-port){
+                    display: none;
+                }
                 height: 27rem;
-                width: 24rem;
+                width: 27rem;
             }
         }
     }
@@ -60,7 +84,7 @@
     display: flex;
     flex-direction: column;
     @include respond(tab-port){
-        flex-direction: row;
+        flex-direction:row;
     }
     align-items: center;
     &--each{
@@ -74,13 +98,13 @@
         padding: 8%;
         border-bottom: 0.5px solid rgb(216, 209, 209);
         @include respond(tab-port){
-            padding: 3%;
-            width: 20rem;
+            padding: 1%;
+            width: 10rem;
             border-bottom: 0;
         }
         @include respond(mobile){
             height: 7rem;
-            width: 10rem;
+            width: 6rem;
         }
         position: relative;
         &:first-child{

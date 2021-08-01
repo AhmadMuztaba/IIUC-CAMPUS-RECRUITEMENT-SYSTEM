@@ -104,14 +104,14 @@ li{
     
     margin-bottom: 50px;
 }
-.cf{
+/* .cf{
     display: grid;
     grid-template-columns: 3fr 5fr;
     margin-bottom: 50px;
 }
 .cf li{
         margin-bottom: 15px;
-}
+} */
 .repo{
     margin-bottom: 30px;
 }

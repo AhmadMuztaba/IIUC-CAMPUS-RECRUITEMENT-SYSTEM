@@ -46,6 +46,9 @@ class CreateProfile extends React.Component {
         },{
             key:'Robotics Engineer',
             value:'Robotics Engineer'
+        },{
+            key:'SQA Engineer',
+            value:'SQA Engineer'
         }
     ]
     skills=[{
@@ -89,7 +92,6 @@ class CreateProfile extends React.Component {
     },{
         name:'Robotics'
     }
-
 ]
     renderError = ({ error, touched }) => {
         if (error && touched) {
@@ -177,10 +179,10 @@ class CreateProfile extends React.Component {
             newskills.push("Django");
         }
         if (formValues['Advanced CSS']) {
-            newskills.concat("Advanced CSS");
+            newskills.push("Advanced CSS");
         }
         if(formValues['Cisco packet tracer']){
-            newskills.concat("Cisco packet tracer");
+            newskills.push("Cisco packet tracer");
         }
         if (formValues.Robotics) {
             newskills.push("Robotics");
@@ -223,12 +225,13 @@ class CreateProfile extends React.Component {
                     <div>Status</div>
                     <Field name="status"component={this.renderSelect} label="status" /> 
                     <Field name="bio" type="text" component={this.renderInput} label="bio" />
-                    <Field name="githubUserName" type="text" component={this.renderInput} label="GitHub Name" />
-                    <Field name="codeforceUserName" type="text" component={this.renderInput} label="CodeForce Name" />
+                    <Field name="githubusername" type="text" component={this.renderInput} label="GitHub Name" />
+                    <Field name="codeforceusername" type="text" component={this.renderInput} label="CodeForce Name" />
                     <Field name="facebook" type="text" component={this.renderInput} label="Facebook" />
-                    <Field name="linkedin" type="text" component={this.renderInput} label="Website" />
+                    <Field name="linkedin" type="text" component={this.renderInput} label="Linkedin" />
                     <Field name="twitter" type="text" component={this.renderInput} label="Twitter" />
-                    <Field name="youtube" type="text" component={this.renderInput} label="Youtube" />
+                    {/* <Field name="website" type="text" component={this.renderInput} label="Website" /> */}
+                    {/* <Field name="youtube" type="text" component={this.renderInput} label="Youtube" /> */}
                     <Field name="instagram" type="text" component={this.renderInput} label="Instagram" />
                     <div className="createProfile__checkbox--label">
                         <div>Skills</div>

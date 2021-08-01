@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../CSS/ShowUserBlog.css'
+import '../CSS/ShowBlog.scss'
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { fetchUserBlogs } from '../../../actions/user/index';
@@ -22,9 +22,9 @@ class ShowUserBlog extends Component {
     }
     render() {
         if (this.props.Blogs){
-           return(<div onScroll={this.roll}  ref={this.userblog} className="ShowUserBlog">{
+           return(<div onScroll={this.roll}  ref={this.userblog} className="userBlog">{
             this.props.Blogs?this.props.Blogs.map((blog,index)=>{
-                return(<Link to={`/userBlog/show/${blog._id}`}><div key={index}className="ShowUserBlog-EachBlog">
+                return(<Link key={index} to={`/userBlog/show/${blog._id}`}><div key={index}className="userBlog__EachBlog">
                     <h4>
                         {blog.title}
                     </h4>

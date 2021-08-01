@@ -24,7 +24,7 @@ class Dashbard extends React.Component {
         this.setState({ hover: null });
     }
     render() {
-        const names = ["About Me", "Write Blog", "Show User Blog", "Alumni Blog", "Show Available Jobs"];
+        const names = ["About Me","Write Blog", "Show User Blog", "Alumni Blog", "Show Available Jobs","Edit Profile","Settings","Sign Out"];
         return (<div className="Dashboard-flex">
             <div className="Dashboard-slidebar" >
                 <Image/>
@@ -52,7 +52,6 @@ class Dashbard extends React.Component {
             <div>
                 <ShowDashboard selected={this.state.selected} />
             </div>
-            <Social/>
         </div>)
     }
 }

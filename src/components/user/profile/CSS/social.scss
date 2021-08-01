@@ -20,7 +20,7 @@
             transform: scale(1.25);
         }
 
-        & a{
+        &a:active,a:hover,a:link,a:visited{
             text-decoration: none;
         }
         &--facebook{
@@ -32,6 +32,9 @@
         }
         &--twitter{
             color: #00acee;
+        }
+        &--linkedin{
+            color:  #2867B2;
         }
         &--github{
             color: #333;

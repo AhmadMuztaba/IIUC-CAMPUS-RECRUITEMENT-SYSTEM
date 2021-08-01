@@ -12,6 +12,7 @@ import GetEducation from './GetEducation';
 import PostEducation from './PostEducation';
 import Typewriter from 'typewriter-effect';
 import Loader from '../../../utility/Loader';
+import Social from './Social';
 
 class AboutMe extends React.Component {
     constructor(props) {
@@ -38,7 +39,8 @@ class AboutMe extends React.Component {
         if(this.props.ownProfile.userProfile.user &&!this.props.ownProfile.userProfile.user.loading&!this.props.loading){
             let date=new Date( this.props.ownProfile.userProfile.dateOfBirth);
            date=date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
-        return (<div className="AboutSection">
+        return (<div style={{display:'flex'}}>
+<div className="AboutSection">
              <h1 className="AboutSection--heading">{this.props.user.user.name}</h1>
            <h2 className="AboutSection--heading-secondary utility-desktop">
             <Typewriter
@@ -147,7 +149,14 @@ class AboutMe extends React.Component {
                 <div>
                     <ul>
                         {this.props.ownProfile.userProfile.company ? <li><h4>{this.props.ownProfile.userProfile.company}</h4></li> : null}
-                        {this.props.ownProfile.userProfile.skills.length > 0 ? <li><h4>{this.props.ownProfile.userProfile.skills}</h4></li> : null}
+                        {this.props.ownProfile.userProfile.skills.length > 0 ? <li><h4>{this.props.ownProfile.userProfile.skills.map((skill,index)=>{
+                            if(this.props.ownProfile.userProfile.skills.length-1===index){
+                                return skill
+                            }else{
+                                return(skill+",");
+                            }
+                        }
+                        )}</h4></li> : null}
                     </ul>
                 </div>
             </div>
@@ -208,7 +217,7 @@ class AboutMe extends React.Component {
                 <div>
                     <ul>
                         {this.props.ownProfile.userProfile.codeforceusername ?
-                            <li><h3>codeforceRatings</h3></li> : <li>
+                            <li><h3>Codeforce Rating</h3></li> : <li>
                                 <h4>
                                     Add codeforce User Name
                          </h4>
@@ -217,7 +226,7 @@ class AboutMe extends React.Component {
                 </div>
                 <div>
                     {this.props.ownProfile.userProfile.codeforceusername ?
-                        <li><GetCodeforce /></li> : <li>
+                        <GetCodeforce /> : <li>
                             <h4 onClick={() => {
                                     this.setState({ cfopen: !(this.state.cfopen) });
                                 }}>
@@ -229,7 +238,10 @@ class AboutMe extends React.Component {
             <div>
             {this.state.cfopen? <PostCodeForce force={this.forceUp}/> : null}
             </div>
-        </div>)
+        </div>
+        <Social social={this.props.ownProfile.userProfile.social}/>
+        </div>
+        )
     }
     else{
         return(<Loader/>)
