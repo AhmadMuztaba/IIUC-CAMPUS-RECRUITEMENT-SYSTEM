@@ -347,7 +347,7 @@ router.patch('/profile/me', auth, async (req, res) => {
             userprofile.location = location;
         }
         if (bio) {
-            userprofile.bio = website;
+            userprofile.bio = bio;
         }
         if (githubusername) {
             userprofile.githubusername = githubusername;
