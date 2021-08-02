@@ -239,7 +239,7 @@ class AboutMe extends React.Component {
             {this.state.cfopen? <PostCodeForce force={this.forceUp}/> : null}
             </div>
         </div>
-        <Social social={this.props.ownProfile.userProfile.social}/>
+        <Social social={this.props.ownProfile.userProfile.social} website={this.props.ownProfile.userProfile.website}/>
         </div>
         )
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../CSS/social.scss';
 const Social = (props) => {
-    if(props.social){
+    if(props.social||props.website){
         return (
             <div className="social">
                 {props.social.facebook?( <div className="social__icons">
@@ -27,6 +27,13 @@ const Social = (props) => {
                   props.social.linkedin?(<div className="social__icons">
                   <a target="_blank" rel="noreferrer" href={props.social.linkedin}>
                             <ion-icon name="logo-linkedin"class="social__icons--linkedin"></ion-icon> 
+                              </a>
+                  </div>):null
+               }
+               {
+                  props.website?(<div className="social__icons">
+                  <a target="_blank" rel="noreferrer" href={props.website}>
+                  <ion-icon name="globe-outline" class="social__icons--ownweb"></ion-icon> 
                               </a>
                   </div>):null
                }

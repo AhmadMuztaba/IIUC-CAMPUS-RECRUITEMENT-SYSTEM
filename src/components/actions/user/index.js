@@ -30,6 +30,8 @@ import {
   WATCH_ALUMNI_GITHUB_REPO,
   WATCH_ALUMNI_CF_RATINGS,
   CLEAR_EVERYTHING,
+  UPDATE_USER_EDUCATION,
+  UPDATE_USER_EXPERIENCE,
 } from "../Type";
 import axios from "axios";
 import { SetToken } from "../utility/SetToken";
@@ -336,7 +338,6 @@ export const updateUserInfo = (info) => async (dispatch) => {
     },
   };
   SetToken(localStorage.getItem("userToken"));
-  console.log(info);
   try {
     const response = await axios.patch("/profile/me", info, config);
     dispatch({
@@ -348,6 +349,30 @@ export const updateUserInfo = (info) => async (dispatch) => {
   }
 };
 
+export const editEducation=(formValue,id)=>async(dispatch)=>{
+try{
+  SetToken(localStorage.getItem("userToken"));
+  const response=await axios.patch(`/profile/me/education/${id}`,formValue);
+  dispatch({
+    type:UPDATE_USER_EDUCATION,
+    payload:response.data
+  })
+}catch(err){
+  
+}
+}
+export const editExperience=(formValue,id)=>async(dispatch)=>{
+  try{
+    SetToken(localStorage.getItem("userToken"));
+    const response=await axios.patch(`/profile/me/experience/${id}`,formValue);
+    dispatch({
+      type:UPDATE_USER_EXPERIENCE,
+      payload:response.data
+    })
+  }catch(err){
+    
+  }
+  }
 export const githubRepo = () => async (dispatch) => {
   try {
     SetToken(localStorage.getItem("userToken"));
