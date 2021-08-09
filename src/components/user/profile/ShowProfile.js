@@ -6,7 +6,7 @@ import {loadUser} from '../../actions/index';
 import Dashbard from './Dashboard';
 import './CSS/ShowProfile.scss';
 import Loader from '../../utility/Loader';
-import history from '../../History';
+
 class ShowProfile extends React.Component {
     componentDidMount() {
         this.props.loadUser();

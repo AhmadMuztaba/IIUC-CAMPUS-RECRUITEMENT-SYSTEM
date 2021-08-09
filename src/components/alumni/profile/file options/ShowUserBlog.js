@@ -22,9 +22,9 @@ class ShowUserBlog extends Component {
     }
     render() {
         if (this.props.Blogs){
-           return(<div onScroll={this.roll}  ref={this.userblog} className="ShowUserBlog">{
-            this.props.Blogs?this.props.Blogs.map((blog)=>{
-                return(<Link to={`/alumni/userBlog/show/${blog._id}`}><div className="ShowUserBlog-EachBlog">
+           return(<div onScroll={this.roll}  ref={this.userblog} className="userBlog">{
+            this.props.Blogs?this.props.Blogs.map((blog,index)=>{
+                return(<Link key={index} to={`/alumni/userBlog/show/${blog._id}`}><div key={index}className="userBlog__EachBlog">
                     <h4>
                         {blog.title}
                     </h4>

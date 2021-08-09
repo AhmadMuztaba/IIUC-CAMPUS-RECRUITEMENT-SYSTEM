@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addAlumniExperience} from '../../../actions/alumni/index';
+import {alumniEditExperience} from '../../../actions/alumni/index';
+import {} from '../../../actions/Type';
 import {Field,reduxForm} from 'redux-form';
-
-class PostExperience extends React.Component{
+class EditEachExperience extends React.Component{
   state={button:true}
   renderError=({error,touched})=>{
     if(error&&touched){
@@ -17,16 +17,16 @@ class PostExperience extends React.Component{
     {this.renderError(meta)}
   </div>)
   }
-   onHandleSubmit=(formValues)=>{
+  onHandleSubmit=(formValues)=>{
     this.setState({button:false})
-    this.props.addAlumniExperience(formValues);
+    this.props.alumniEditExperience(formValues,this.props.id);
     this.props.reset();
     setTimeout(()=>{
       this.setState({button:true})
     },2500)
   }
     render(){
-      return(<div className="utility__flex">
+      return(<div className="utility__flex animation">
         <form onSubmit={
           this.props.handleSubmit(this.onHandleSubmit)}>
         <Field  type="text" name="title" component={this.renderInput} label="title"/>
@@ -61,10 +61,10 @@ const mapStateToProps = (state) => {
 }
 
 const form=reduxForm({
-  form:'PostExperience',
+  form:'EditExperience',
   validate
-})(PostExperience)
+})(EditEachExperience)
 ;
 export default connect(mapStateToProps,{
-  addAlumniExperience
+alumniEditExperience
 })(form);

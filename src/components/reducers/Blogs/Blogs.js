@@ -17,7 +17,9 @@ import {
   FETCH_ALUMNI_BLOG_BY_ID_BY_ADMIN,
   DELETE_ALUMNI_BLOG,
   DELETE_USER_BLOG,
-  CLEAR_EVERYTHING
+  CLEAR_EVERYTHING,
+  USER_SIGN_OUT,
+  ALUMNI_SIGN_OUT
 } from "../../actions/Type";
 import _ from "lodash";
 const INITIALSTATE = {
@@ -119,6 +121,8 @@ export const Blogs = (state = INITIALSTATE, action) => {
         ..._.omit(state.AlumniBlogs, payload.id),
       };
     case CLEAR_EVERYTHING:
+      case USER_SIGN_OUT:
+        case ALUMNI_SIGN_OUT:
         return{
             Userblogs: {},
             AlumniBlogs: {},

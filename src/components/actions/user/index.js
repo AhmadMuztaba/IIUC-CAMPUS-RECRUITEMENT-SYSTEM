@@ -32,6 +32,7 @@ import {
   CLEAR_EVERYTHING,
   UPDATE_USER_EDUCATION,
   UPDATE_USER_EXPERIENCE,
+  CLEAR_USER_PROFILE,
 } from "../Type";
 import axios from "axios";
 import { SetToken } from "../utility/SetToken";
@@ -405,6 +406,12 @@ export const UserSignOut = () => async (dispatch) => {
     dispatch({
       type: USER_SIGN_OUT,
     });
+    dispatch({
+      type:CLEAR_USER_PROFILE
+    })
+    // dispatch({
+    //   tpe:CLEAR_EVERYTHING
+    // })
   } catch (err) {
     dispatch({
       type: USER_SIGN_OUT,

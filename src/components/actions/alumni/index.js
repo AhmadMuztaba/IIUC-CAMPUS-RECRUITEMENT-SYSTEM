@@ -5,8 +5,7 @@ import {ALUMNI_SIGN_IN,ALUMNI_AUTH_FAIL,ALUMNI_REGISTRATION_SUCCESS,ALUMNI_REGIS
     CREATE_ALUMNI_BLOG,UPLOAD_PERCENTAGE,FETCH_USER_BLOG,FETCH_USER_BLOGS,CREATE_ALUMNI_EDUCATION,
     CREATE_ALUMNI_EXPERIENCE,GET_ALUMNI_GITHUBREPOS,GET_ALUMNI_CODEFORCERATINGS,FETCH_ALUMNI_BLOG,
     FETCH_ALUMNI_BLOGS,FETCH_USER_BLOG_COMMENTS,FETCH_ALUMNI_BLOG_COMMENTS,POST_ALUMNI_PROFILE_PIC,
-    SEARCH_USER,WATCH_USER_PROFILE,WATCH_USER_GITHUB_REPOS,WATCH_USER_CODEFORCE_RATING,CLEAR_EVERYTHING
-
+    SEARCH_USER,WATCH_USER_PROFILE,WATCH_USER_GITHUB_REPOS,WATCH_USER_CODEFORCE_RATING,CLEAR_EVERYTHING, EDIT_ALUMNI_EXPERIENCE, EDIT_ALUMNI_EDUCATION
 } from '../Type';
 import {SetError} from '../Error/index'
 import { SetToken } from '../utility/SetToken';
@@ -328,6 +327,31 @@ export const updateAlumniInfo = (info) => async dispatch => {
         dispatch(SetError(err.response.data.err));
     }
 }
+
+export const alumniEditEducation=(info,id)=>async(dispatch)=>{
+    try{
+      SetToken(localStorage.getItem("userToken"));
+      const response=await axios.patch(`/profile/alumni/education/${id}`,info);
+      dispatch({
+        type:EDIT_ALUMNI_EDUCATION,
+        payload:response.data
+      })
+    }catch(err){
+      
+    }
+    }
+export const alumniEditExperience=(info,id)=>async(dispatch)=>{
+    try{
+      SetToken(localStorage.getItem("userToken"));
+      const response=await axios.patch(`/profile/alumni/experience/${id}`,info);
+      dispatch({
+        type:EDIT_ALUMNI_EXPERIENCE,
+        payload:response.data
+      })
+    }catch(err){
+      
+    }
+    }
 
 export const AlumnigithubRepo = () => async dispatch => {
     try {

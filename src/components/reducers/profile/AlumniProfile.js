@@ -13,7 +13,10 @@ import {
   WATCH_USER_PROFILE,
   WATCH_USER_GITHUB_REPOS,
   WATCH_USER_CODEFORCE_RATING,
+  EDIT_ALUMNI_EDUCATION,
+  EDIT_ALUMNI_EXPERIENCE,
   CLEAR_EVERYTHING,
+  ALUMNI_SIGN_OUT
 } from "../../actions/Type";
 
 const INITIAL_STATE = {
@@ -33,6 +36,8 @@ export const AlumniProfile = (state = INITIAL_STATE, action) => {
     case ALUMNI_CREATE_PROFILE:
     case CREATE_ALUMNI_EXPERIENCE:
     case CREATE_ALUMNI_EDUCATION:
+      case EDIT_ALUMNI_EXPERIENCE:
+        case EDIT_ALUMNI_EDUCATION:
       return {
         ...state,
         alumniProfile: { ...state.userProfile, ...payload },
@@ -70,6 +75,7 @@ export const AlumniProfile = (state = INITIAL_STATE, action) => {
     }
     case CLEAR_EVERYTHING:
     case CLEAR_ALUMNI_PROFILE:
+      case ALUMNI_SIGN_OUT:
       return {
         alumniProfile: null,
         usersProfiles: {},

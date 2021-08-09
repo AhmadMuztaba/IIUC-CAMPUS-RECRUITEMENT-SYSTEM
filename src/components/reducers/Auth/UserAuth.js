@@ -33,7 +33,6 @@ export const UserAuth=(state=INITIAL_STATE,action)=>{
                  case USER_SIGN_OUT:
                      return({
                          token:localStorage.removeItem('userToken'),
-                         ...state,
                          user:null,
                          loading:false,
                          isAuthenticated:false,

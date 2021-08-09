@@ -4,7 +4,7 @@ import WriteBlog from './file options/WriteBlog';
 import ShowUserBlog from './file options/ShowUserBlog';
 import ShowAlumniBlog from './file options/ShowAlumniBlog';
 import SearchUser from './file options/SearchUser'; 
-
+import EditProfile from './EditProfile';
 class ShowDashboard extends React.Component {
     render() {
         if (!this.props.selected) {
@@ -26,6 +26,12 @@ class ShowDashboard extends React.Component {
         }
         else if (this.props.selected === 4) {
             return (<SearchUser/>);
+        }
+        else if(this.props.selected===5){
+            return (<EditProfile/>)
+        }
+        else if(this.props.selected===6){
+            return 'Logging Out...';
         }
     }
 }

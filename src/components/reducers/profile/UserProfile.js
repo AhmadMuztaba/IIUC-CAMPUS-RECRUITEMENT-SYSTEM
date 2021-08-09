@@ -16,7 +16,8 @@ import {
   WATCH_ALUMNI_PROFILE,
   CLEAR_EVERYTHING,
   UPDATE_USER_EDUCATION,
-  UPDATE_USER_EXPERIENCE
+  UPDATE_USER_EXPERIENCE,
+  USER_SIGN_OUT
 } from "../../actions/Type";
 
 //import _ from 'lodash';
@@ -47,7 +48,7 @@ export const UserProfile = (state = INITIAL_STATE, action) => {
         userProfile: { ...state.userProfile, ...payload.profile },
         loading: false,
       };
-      
+
     case UPDATE_USER_EXPERIENCE:
     case UPDATE_USER_EDUCATION:
     case CREATE_USER_EDUCATION:
@@ -84,6 +85,7 @@ export const UserProfile = (state = INITIAL_STATE, action) => {
         profilePic: payload,
       };
     case CLEAR_EVERYTHING:
+    case USER_SIGN_OUT:
     case CLEAR_USER_PROFILE:
       return {
         userProfile: null,

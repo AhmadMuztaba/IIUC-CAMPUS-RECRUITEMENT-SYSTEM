@@ -1,14 +1,14 @@
 import React from 'react';
 import './CSS/Dashboard.css'
 import { connect } from 'react-redux';
-
 import SideOption from './SideOption';
-import ShowDashboard from './ShowDashboard'
+import ShowDashboard from './ShowDashboard';
+import Image from './file options/Image';
 class Dashbard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: null,
+            selected:0,
             hover: null,
         }
         this.optionRef = React.createRef();
@@ -23,9 +23,11 @@ class Dashbard extends React.Component {
         this.setState({ hover: null });
     }
     render() {
-        const names = ["Profile", "Write Blog", "Show User Blog", "Alumni Blog", "Search for User"];
-        return (<div className="Dashboard-grid">
-            <div className="Dashboard-info" >
+        const names = ["About Me", "Write Blog", "Show User Blog", "Alumni Blog", "Search for User","Edit Profile","Sign Out"];
+        return (<div className="Dashboard-flex">
+            <div className="Dashboard-slidebar" >
+                <Image/>
+                <div className="slidebar__option">
                 {
                     names.map((name, index) => {
                         let color;
@@ -44,6 +46,7 @@ class Dashbard extends React.Component {
                         return (<SideOption key={index} name={name} value={index} klik={this.onHandleClick} mouseIn={this.onMouseEnter} mouseOut={this.onMouseOut} color={color} hoverColor={hoverColor} />);
                     })
                 }
+                </div>
             </div>
             <div>
                 <ShowDashboard selected={this.state.selected} />

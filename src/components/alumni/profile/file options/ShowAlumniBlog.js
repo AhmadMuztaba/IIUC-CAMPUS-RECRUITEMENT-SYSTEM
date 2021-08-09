@@ -17,14 +17,14 @@ class ShowAlumniBlog extends Component {
     roll=()=>{
          if(this.userblog.current.scrollHeight-this.userblog.current.scrollTop===this.userblog.current.clientHeight){
             this.setState({page:this.state.page+1});
-            this.props.fetchAlumniBlogs(this.state.page);
+            this.props.fetchUserBlogs(this.state.page);
         }
     }
     render() {
         if (this.props.Blogs){
-           return(<div onScroll={this.roll}  ref={this.userblog} className="ShowUserBlog">{
-            this.props.Blogs?this.props.Blogs.map((blog)=>{
-                return(<Link to={`/alumni/AlumniBlog/show/${blog._id}`}><div className="ShowUserBlog-EachBlog">
+           return(<div onScroll={this.roll}  ref={this.userblog} className="alumniBlog">{
+            this.props.Blogs?this.props.Blogs.map((blog,index)=>{
+                return(<Link key={index} to={`/alumni/AlumniBlog/show/${blog._id}`}><div className="alumniBlog__EachBlog">
                     <h4>
                         {blog.title}
                     </h4>

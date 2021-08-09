@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SideOption from './SideOption';
 import ShowDashboard from './ShowDashboard';
 import Image from './file options/Image';
-import Social from './file options/Social';
+
 class Dashbard extends React.Component {
     constructor(props) {
         super(props);

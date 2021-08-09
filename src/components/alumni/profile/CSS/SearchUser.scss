@@ -1,0 +1,57 @@
+@import '../../../mixin.scss';
+.SearchUser{
+    margin-left: 47rem;
+    @include respond(tab-land){
+        margin-left: 40rem;
+    }
+    @include respond(tab-port){
+        margin-left: 0;
+        text-align: center;
+    }
+    &__search{
+        text-align: center;
+        margin-bottom: 10rem;
+        margin-top: 10rem;
+        height: 10rem;
+        width: 70rem;
+        @include respond(tab-land){
+            width:60rem
+        }
+        @include respond(tab-port){
+            margin-bottom: 5rem;
+            width: 90%
+        }
+        font-size: 100%;
+        border: 0.5px solid #e4e7ec;
+        box-shadow: 0.7px 1.5px rgba(0,0, 0 ,0.1);
+        outline: none;
+    }
+    &__everyUser{
+        text-decoration: none;
+        font-size: 120%;
+        margin-left: 2rem;
+        margin: 0 auto;
+        padding: 2%;
+        width: 55rem;
+        @include respond(tab-port){
+            width: 80%;
+        }
+        @include respond(mobile){
+            width: 80%;
+        }
+        margin-bottom: 1rem;
+        background-color: rgb(242, 245, 255);
+        font-weight: 400;
+        color:rgb(99, 99, 91)
+    }
+}
+
+
+.show-User{
+    text-align: center;
+    
+}
+
+.show-User a{
+    color:rgb(99, 99, 91)
+}

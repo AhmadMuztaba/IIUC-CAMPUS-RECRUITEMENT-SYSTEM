@@ -10,7 +10,9 @@ import GetExperience from './GetExperience';
 import PostExperience from './PostExperience';
 import GetEducation from './GetEducation';
 import PostEducation from './PostEducation';
-
+import Social from './Social';
+import Typewriter from 'typewriter-effect';
+import Loader from '../../../utility/Loader';
 class AboutMe extends React.Component {
     constructor(props) {
         super(props);
@@ -29,67 +31,70 @@ class AboutMe extends React.Component {
             this.setState({ height: this.sidelineRef.current.clientHeight });
         }
     }
-    render() {  
+    render() {
+        if(this.props.alumni.loading){
+            return(<div>Loading</div>)
+        }
         if(this.props.ownProfile.alumniProfile&&!this.props.ownProfile.loading&&!this.props.alumni.loading){
-        return (<div className="show-Dashboard">
-            <h1>
-                {this.props.alumni.alumni.name}
-            </h1>
-            <h2>
-                {this.props.ownProfile.alumniProfile.alumniProfile.status}
-            </h2>
-            <h3>
-                About Me
-             </h3>
-            <div className="quote_1">
-                “
-             </div>
-            <p className="AboutMe">
-                {this.props.ownProfile.alumniProfile.alumniProfile.about}
-            </p>
-            <div className="quote_2">
-                ”
-            </div>
-            <div className="line">
-            </div>
-            <h3>
-                Personal Info
-            </h3>
-            <div className="personal-info">
-                <div>
-                    <ul>
-                        <li>
-                            <h4>Name</h4>
-                        </li>
-                        <li>
-                            <h4>Passing Year</h4>
-                        </li>
-                    </ul>
-                   
-                </div>
-                <div>
-                    <li>
-                        <h4>{this.props.alumni.alumni.name}</h4>
-                    </li>
-                    <li>
-                    <h4>{this.props.ownProfile.alumniProfile.alumniProfile.passingYear}</h4>
-                    </li>
-                </div>
-            </div>
-            <h3>
-                Contact
-        </h3>
-            <div className="email-info">
-                <div className="cent">
-                    <ion-icon name="mail-open-outline" class="contact-icon"></ion-icon>
-                    <p> {this.props.alumni.alumni.email}</p>
-                </div>
-            </div>
+        return (<div style={{display:'flex'}}>
+<div className="AboutSection">
+             <h1 className="AboutSection--heading">{this.props.alumni.alumni.name}</h1>
+           <h2 className="AboutSection--heading-secondary utility-desktop">
+            <Typewriter
+            onInit={(typewriter)=>{
+                typewriter.typeString(this.props.ownProfile.alumniProfile.alumniProfile.status)
+                .pauseFor(4500)
+                .deleteAll()
+                .start();
+            }
+        }
+        options={{loop:true}}
+            />
+           </h2>
+           <h2 className="AboutSection--heading-secondary utility-mobile">
+            {this.props.ownProfile.alumniProfile.alumniProfile.status}
+           </h2>
+           <div className="AboutSection--me">
+           <h3 className="AboutSection--heading-Tertiary">About Me</h3>
+           <p className="AboutSection__aboutme">
+           {this.props.ownProfile.alumniProfile.alumniProfile.about}
+           </p>
+           </div>
+            <div className="AboutSection__personalInfo">
+           <h3 className="AboutSection--heading-Tertiary">Persononal Info</h3>
+               <div className="AboutSection__personalInfo--info">
+                    <div className="AboutSection__personalInfo--name">
+                        <div>
+                            Name
+                        </div>
+                        <div>
+                            Passing Year
+                        </div>
+                    </div>
+               <div className="AboutSection__personalInfo--desc">
+                        <div>
+                        {this.props.alumni.alumni.name}
+                        </div>
+                        <div>
+                            {this.props.ownProfile.alumniProfile.alumniProfile.passingYear}
+                        </div>
+               </div>
+               </div>
+           </div>  
+        <h3 className="AboutSection--heading-Tertiary">Contact</h3>
+           <div className="contact__box">
+               <div className="contact__box--icon">
+               <ion-icon name="mail-open-outline"></ion-icon>
+               </div>
+               <div className="contact__box--email">
+               {this.props.alumni.alumni.email}
+               </div>
+           </div>
 
             <div className="professional-info">
                 <div>
                     <ul>
-                        {this.props.ownProfile.alumniProfile.alumniProfile.education.length > 0 ?
+                        { this.props.ownProfile.alumniProfile.alumniProfile.education.length > 0 ?
                             null : <li>
                                 <h4>
                                     Add Education
@@ -98,16 +103,19 @@ class AboutMe extends React.Component {
                     </ul>
                 </div>
                 <div>
-                    {this.props.ownProfile.alumniProfile.alumniProfile.education.length > 0 ?
+                    { this.props.ownProfile.alumniProfile.alumniProfile.education.length > 0 ?
                         null : <li>
-                            <h4>
-                                <ion-icon name="chevron-down-outline" onClick={() => {
+                            <h4 onClick={() => {
                                     this.setState({ Eduopen: !(this.state.Eduopen) });
-                                }}></ion-icon>
+                                }}>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
                             </h4>
                         </li>}
                 </div>
-                {this.state.Eduopen ? <PostEducation/> : null}
+                
+            </div>
+            <div className="AboutSection__utility-margin">
+            {this.state.Eduopen ? <PostEducation/> : null}
             </div>
             {
                 this.props.ownProfile.alumniProfile.alumniProfile.education.length>0?
@@ -117,23 +125,20 @@ class AboutMe extends React.Component {
                 Professional info
             </h3>
             <div className="professional-info" >
-                <div style={{ height: `${this.state.height}px`, borderRight: '1px solid #e0e0dc', verticalAlign: 'center', marginBottom: '80px' }}>
+                <div style={{ height: `${this.state.height}px`, borderRight: '1px solid #e0e0dc', verticalAlign: 'center'}}>
                     <ul ref={this.sidelineRef}>
-                        {this.props.ownProfile.alumniProfile.alumniProfile.currentJob ? <li><h4>Company</h4></li> : null}
-                        {this.props.ownProfile.alumniProfile.alumniProfile.status ? <li><h4>Status</h4></li> : null}
+                        {this.props.ownProfile.alumniProfile.alumniProfile.currentJob? <li><h4>Company</h4></li> : null}
                     </ul>
                 </div>
                 <div>
                     <ul>
-                    {this.props.ownProfile.alumniProfile.alumniProfile.currentJob ? <li><h4>{this.props.ownProfile.alumniProfile.alumniProfile.currentJob}</h4></li> : null}
-                    {this.props.ownProfile.alumniProfile.alumniProfile.status ? <li><h4>{this.props.ownProfile.alumniProfile.alumniProfile.status}</h4></li> : null}
+                        {this.props.ownProfile.alumniProfile.alumniProfile.currentJob? <li><h4>{this.props.ownProfile.alumniProfile.alumniProfile.currentJob}</h4></li> : null}
                     </ul>
                 </div>
             </div>
             <div className="professional-info">
                 <div>
                     <ul>
-                       
                        <li>
                                 <h4>
                                     Create Experience
@@ -142,17 +147,19 @@ class AboutMe extends React.Component {
                     </ul>
                 </div>
                 <div>
-                    
                         <li>
-                            <h4>
-                                <ion-icon name="chevron-down-outline" onClick={() => {
+                            <h4 onClick={() => {
                                     this.setState({ Exuopen: !(this.state.Exuopen) });
-                                }}></ion-icon>
+                                }}>
+                                <ion-icon name="chevron-down-outline" ></ion-icon>
                             </h4>
                         </li>
                 </div>
-                {this.state.Exuopen ? <PostExperience/> : null}
             </div>
+            <div className="">
+            {this.state.Exuopen ? <PostExperience force={this.forceUp}/> : null}
+            </div>
+            
             {
                 this.props.ownProfile.alumniProfile.alumniProfile.experience.length>0?
                 <GetExperience exp={this.props.ownProfile.alumniProfile.alumniProfile.experience}/>:null
@@ -160,7 +167,7 @@ class AboutMe extends React.Component {
             <div className="personal-info">
                 <div>
                     <ul>
-                        {this.props.ownProfile.alumniProfile.alumniProfile.githubusername ?
+                        {this.props.ownProfile.alumniProfile.alumniProfile.githubusername?
                             <li><h3>Repositories</h3></li> : <li>
                                 <h4>
                                     Add Github User Name
@@ -170,21 +177,23 @@ class AboutMe extends React.Component {
                 </div>
                 <div>
                     {this.props.ownProfile.alumniProfile.alumniProfile.githubusername ?
-                        <li><GetGithub /></li> : <li>
-                            <h4>
-                                <ion-icon name="chevron-down-outline" onClick={() => {
+                        <li><GetGithub/></li> : <li>
+                            <h4 onClick={() => {
                                     this.setState({ Gitopen: !(this.state.Gitopen) });
-                                }}></ion-icon>
+                                }}>
+                                <ion-icon name="chevron-down-outline" ></ion-icon>
                             </h4>
                         </li>}
                 </div>
-                {this.state.Gitopen ? <PostGitHub force={this.forceUp}/> : null}
+            </div>
+            <div>
+            {this.state.Gitopen ? <PostGitHub force={this.forceUp}/> : null}
             </div>
             <div className="personal-info">
                 <div>
                     <ul>
-                        {this.props.ownProfile.alumniProfile.alumniProfile.codeforceusername ?
-                            <li><h3>codeforceRatings</h3></li> : <li>
+                        {this.props.ownProfile.alumniProfile.alumniProfile.codeforceusername?
+                            <li><h3>Codeforce Rating</h3></li> : <li>
                                 <h4>
                                     Add codeforce User Name
                          </h4>
@@ -193,21 +202,25 @@ class AboutMe extends React.Component {
                 </div>
                 <div>
                     {this.props.ownProfile.alumniProfile.alumniProfile.codeforceusername ?
-                        <li><GetCodeforce /></li> : <li>
-                            <h4>
-                                <ion-icon name="chevron-down-outline" onClick={() => {
+                        <GetCodeforce /> : <li>
+                            <h4 onClick={() => {
                                     this.setState({ cfopen: !(this.state.cfopen) });
-                                }}></ion-icon>
+                                }}>
+                                <ion-icon name="chevron-down-outline" ></ion-icon>
                             </h4>
                         </li>}
                 </div>
-                {this.state.cfopen? <PostCodeForce/> : null}
             </div>
-
-        </div>)
+            <div>
+            {this.state.cfopen? <PostCodeForce force={this.forceUp}/> : null}
+            </div>
+        </div>
+        <Social social={this.props.ownProfile.alumniProfile.alumniProfile.social} website={this.props.ownProfile.alumniProfile.alumniProfile.website }/>
+        </div>
+        )
     }
     else{
-        return(<div>Loading</div>)
+        return(<Loader/>)
     }
 }
 }

@@ -18,18 +18,21 @@ class PostCodeForce extends Component {
         if(!this.props.profile.loading&&this.props.profile.alumniProfile.alumniProfile.codeforceusername){
             return null
         }
-         return (
-             <div>
-                 <form onSubmit={this.onHandleSubmit}>
-                     <input type="text"name="codeforceusername" value={this.state.value}  required={true} onChange={(e)=>{
-                      this.setState({value:e.target.value}); 
-                     }}/>
-                     {
-                       this.state.button?<button type="submit">Add</button>:<button disabled >Submitting</button>
-                    }
-                 </form>
-             </div>
-         );
+        return (
+            <div className="utility__flex">
+                <form onSubmit={this.onHandleSubmit}>
+                    <label>CodeForce User Name</label>
+                    <input type="text" className="education_input" name="codeforceusername" value={this.state.value} required={true} onChange={(e) => {
+                        this.setState({ value: e.target.value });
+                    }} />
+                    <div className="AboutSection__btn">
+                        {
+                            this.state.button ? <button type="submit" className="AboutSection__btn--add">Add</button> : <button disabled className="createProfile__btn--add">Submitting</button>
+                        }
+                    </div>
+                </form>
+            </div>
+        );
      }
 }
 const mapStateToProps=(state)=>{

@@ -54,8 +54,6 @@ class GetExperience extends Component {
 
                                         <h4>{to}<li>
                                         </li></h4>
-
-
                                         <h4><li>{exp.description}</li></h4>
                                     </ul>
                                 </div>
