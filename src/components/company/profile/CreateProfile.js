@@ -3,23 +3,26 @@ import { connect } from 'react-redux';
 import {Redirect } from 'react-router-dom';
 import {CompanyOwnProfile,CreateCompanyProfile} from '../../actions/company/index'
 import { reduxForm, Field } from 'redux-form';
-
-import '../../Error/css/Error.css'
+import Loader from '../../utility/Loader';
 class CreateProfile extends React.Component {
-    state = { button: true }
+    state = { button: true,skillshow:false}
     componentDidMount() {
         this.props.CompanyOwnProfile();
     }
     renderError = ({ error, touched }) => {
         if (error && touched) {
-            return (<div className="Normal-Error">{error}</div>)
+            return (<div className="createProfile__error">{error}</div>)
         }
     }
     renderInput = ({ input, label, meta, type }) => {
         return (
             <div>
+                <div>
                 <label>{label}</label>
-                <input {...input} type={type} />
+                </div>
+               <div>
+               <input className="createProfile__inputtextstyle" {...input} type={type} autoComplete="off" />
+               </div>
                 {this.renderError(meta)}
             </div>
         )
@@ -31,10 +34,12 @@ class CreateProfile extends React.Component {
     }
     render() {
         if (this.props.profile.loading) {
-            return (<div>Loading</div>)
+            return (<Loader/>)
         }
         else if (!this.props.profile.alumniProfile && !this.props.profile.loading) {
             return (
+                <div className="createProfile">
+                    <div className="createProfile__formBackground">
                 <form onSubmit={this.props.handleSubmit(this.HandleSubmit)}>
                     <Field name="established" type="text" component={this.renderInput} label="Established" />
                     <Field name='website' type="text" component={this.renderInput} label="Website"/>
@@ -47,10 +52,14 @@ class CreateProfile extends React.Component {
                     <Field name="twitter" type="text" component={this.renderInput} label="Twitter" />
                     <Field name="youtube" type="text" component={this.renderInput} label="Youtube" />
                     <Field name="instagram" type="text" component={this.renderInput} label="Instagram" />
+                    <div className="createProfile__btn">
                     {
-                        this.state.button ? <button type="submit">Add</button> : <button disabled >Submitting</button>
+                        this.state.button?<button type="submit" className="createProfile__btn--add">Add</button> : <button disabled className="createProfile__btn--add">Submitting</button>
                     }
+                    </div>
                 </form>
+                </div>
+                </div>
             )
         }
         else if (this.props.profile.companyProfile && !this.props.profile.loading) {
@@ -67,10 +76,10 @@ const validate = (formValue) => {
         error.About = "About needed"
      }
     if (!formValue.mission) {
-        error.mission = "what is your mission"
+        error.mission = "what is your mission?"
     }
     if (!formValue.vision) {
-        error.vision = "what is your vision"
+        error.vision = "what is your vision?"
     }
     return error;
 }

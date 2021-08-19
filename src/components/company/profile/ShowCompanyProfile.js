@@ -1,25 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { CompanyOwnProfile} from '../../actions/company/index';
+import { CompanyOwnProfile,CompanySignOut} from '../../actions/company/index';
 import {loadUser} from '../../actions/index';
 import Dashbard from './Dashboard';
+import Loader from '../../utility/Loader';
 
 class ShowCompanyProfile extends React.Component {
     componentDidMount() {
         this.props.loadUser();
         this.props.CompanyOwnProfile();
     }
-    render() {
-        console.log(this.props);
-        
+    render() {    
         if (this.props.CompanyProfile.loading&&this.props.company.loading) {
-            return (<div>Loading</div>)
+            return (<Loader/>)
         }  
         else if (!this.props.CompanyProfile.companyProfile && !this.props.CompanyProfile.loading&&!this.props.company.loading) {
-            return (<div><h1>Welcome</h1>
+            return (<div className="noprofile">
+                <h1 className="noprofile__welcome">Welcome</h1>
                 {this.props.company.company.name}
-                <Link to="/company/createProfile"><button>Create profile</button></Link>
+                <div className="noprofile__button">
+                    <div>
+                    <Link to="/company/createProfile"><button>Create profile</button></Link>
+                    </div>
+                    <div>
+                    <Link to="/"><div className="noprofile__button--signout"
+                onClick={()=>{  
+                    this.props.CompanySignOut();
+                }}>SignOut</div></Link>
+                    </div>
+                </div>
             </div>)
         }
         else if (this.props.CompanyProfile.companyProfile && !this.props.CompanyProfile.loading) {
@@ -28,9 +38,8 @@ class ShowCompanyProfile extends React.Component {
             </div>)
         }
         else{
-            return(<div>Loading</div>)
-        }
-        
+            return (<Loader/>)
+        }   
     }
 }
 const mapStateToProps = (state) => {
@@ -39,4 +48,4 @@ const mapStateToProps = (state) => {
         CompanyProfile: state.CompanyProfile
     });
 }
-export default connect(mapStateToProps,{CompanyOwnProfile, loadUser })(ShowCompanyProfile);
+export default connect(mapStateToProps,{CompanyOwnProfile, loadUser,CompanySignOut })(ShowCompanyProfile);
