@@ -30,13 +30,12 @@ class CreateProfile extends React.Component {
     HandleSubmit = (formValues) => {
         this.setState({ button: false })
         this.props.CreateCompanyProfile(formValues);
-
     }
     render() {
         if (this.props.profile.loading) {
             return (<Loader/>)
         }
-        else if (!this.props.profile.alumniProfile && !this.props.profile.loading) {
+        else if (!this.props.profile.companyProfile && !this.props.profile.loading) {
             return (
                 <div className="createProfile">
                     <div className="createProfile__formBackground">

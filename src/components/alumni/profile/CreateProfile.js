@@ -76,7 +76,6 @@ class CreateProfile extends React.Component {
         this.setState({ button: false })
         this.forceUpdate();
         this.props.CreateAlumniProfile(formValues);
-
     }
     
     renderSelect=({input,meta})=>{

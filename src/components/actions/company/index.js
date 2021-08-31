@@ -108,6 +108,7 @@ export const CreateCompanyProfile = (data) => async (dispatch) => {
 };
 
 export const CompanyOwnProfile = () => async (dispatch) => {
+  SetToken(localStorage.getItem('companyToken'));
   try {
     const response = await axios.get("/profile/company/me");
     dispatch({

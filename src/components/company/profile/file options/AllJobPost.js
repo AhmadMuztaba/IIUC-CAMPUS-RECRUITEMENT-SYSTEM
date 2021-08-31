@@ -10,11 +10,15 @@ class AllJobPost extends Component {
             return null;
         }
         else if(this.props.jobs){
-            return(<div>
-                {this.props.jobs.map((job)=>{
-                    return(<div>             
-                        <h4>{job.title}</h4>
-                        <p>{job.description}</p>
+            return(<div className="jobpost">
+                {this.props.jobs.map((job,index)=>{
+                    return(<div key={index} className="jobpost__eachpost">             
+                        <div className="jobpost__eachpost--heading">
+                            {job.title}
+                        </div>
+                        <div className="jobpost__eachpost--description">
+                        {job.description}
+                        </div>
                         <div>
                             <ul>
                                 Applied Users:

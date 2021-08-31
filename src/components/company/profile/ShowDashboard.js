@@ -18,6 +18,9 @@ class ShowDashboard extends React.Component {
         else if (this.props.selected === 2) {
             return (<SearchUser/>);
         }
+        else if(this.props.selected===3){
+            return ('Signing Out')
+        }
     }
 }
 export default ShowDashboard
