@@ -556,8 +556,8 @@ router.post('/job/user/:id',auth,async(req,res)=>{
             throw new Error('no jobs found');
         }
         job.appliedUsers.map((user)=>{
-            if(toString(req.user._id)===toString(user)){
-                throw new Error('already exists');
+            if(req.user._id.toString()===user.user._id.toString()){
+                throw new Error('already exist');
             }
         })
         job.appliedUsers=job.appliedUsers.concat({user:req.user._id});
