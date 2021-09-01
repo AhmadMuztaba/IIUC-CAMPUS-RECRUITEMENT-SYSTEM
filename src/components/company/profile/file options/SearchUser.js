@@ -24,19 +24,19 @@ const SearchUser = ({searchUsers,users}) => {
     },[search]);
   
     return (  
-        <div>
+        <div className="SearchUser">
             <form>
-                <input type="text" className="search" placeholder="search" autoComplete="off" placeholder="" name="search" onChange={(e)=>{
+                <input type="text" className="SearchUser__search" placeholder="search" autoComplete="off" placeholder="" name="search" onChange={(e)=>{
                       setName(e.target.value);
                 }}/>
             </form>
-           {adSearch?null:<div onClick={()=>{
+           {adSearch?null:<div style={{marginBottom:'3rem'}} onClick={()=>{
                 setadSearch(true);
             }}><ion-icon name="search-circle-outline"></ion-icon>Advanced Search</div>}
             {adSearch?<AdvancedSearch/>:null}
             <div class="show-User">
                 {search?<h2>Search Result</h2>:<h2>Search for an user</h2>}
-                {users? search&&users.length<=0?<div className="EveryUser">No User found</div>: <div>
+                {users? search&&users.length<=0?<div className="SearchUser__everyUser">No User found</div>: <div>
                    {users.map((user)=>{
                       return(<Link to={`/company/watch/userProfile/${user._id}`}><div class="EveryUser">{user.name}</div></Link>)
                    })}

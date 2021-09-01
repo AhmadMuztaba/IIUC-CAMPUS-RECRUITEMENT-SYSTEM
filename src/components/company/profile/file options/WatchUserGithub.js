@@ -24,7 +24,6 @@ class WatchUserGithub extends Component {
                 }
 }
 const mapStateToProps=(state)=>{
-    console.log(state.AlumniProfile.GithubRepos)
-    return({Repositories:state.AlumniProfile.GithubRepos});
+    return({Repositories:state.CompanyProfile.GithubRepos});
 }
 export default connect(mapStateToProps,{UserGithubRepos})(WatchUserGithub);

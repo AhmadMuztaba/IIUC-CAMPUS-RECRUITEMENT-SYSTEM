@@ -137,7 +137,6 @@ class CreateProfile extends React.Component {
     HandleSubmit = (formValues) => {
         this.setState({ button: false })
         this.forceUpdate();
-        console.log(formValues);
         let newskills = [];
         if (formValues['C/C++']) {
             newskills.push("C/C++");

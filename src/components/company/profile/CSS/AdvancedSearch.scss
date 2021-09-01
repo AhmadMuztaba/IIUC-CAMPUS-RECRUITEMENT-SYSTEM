@@ -1,0 +1,22 @@
+@import '../../../mixin.scss';
+.utility__margin--right-big{
+    margin-right: 10rem;
+
+    @include respond(mobile){
+        margin-right: 2rem;
+    }
+}
+.skill___search{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+    &--btn{
+        background-color: #b3b542;
+        color: white;
+        height: 6rem;
+        width: 8rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        border: none;
+    }
+}

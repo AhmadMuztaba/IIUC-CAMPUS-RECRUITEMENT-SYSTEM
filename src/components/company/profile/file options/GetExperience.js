@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
-
+import { } from 'react-redux';
+import { } from '../../../actions/user/index';
+import { } from '../../../actions/Type';
 class GetExperience extends Component {
     render() {
         return (
@@ -53,8 +54,6 @@ class GetExperience extends Component {
 
                                         <h4>{to}<li>
                                         </li></h4>
-
-
                                         <h4><li>{exp.description}</li></h4>
                                     </ul>
                                 </div>

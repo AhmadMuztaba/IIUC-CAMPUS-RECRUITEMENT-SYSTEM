@@ -18,13 +18,8 @@ class GetEducation extends Component {
                         <li>
                             <h4>University</h4>
                         </li>
-                        
                            <h4><li>Bsc Passing Year</li></h4>
-                        
-                        
                            <h4> <li>Field Of Study</li></h4>
-                        
-                        
                             <h4><li>Description</li></h4>
                         
                     </ul>

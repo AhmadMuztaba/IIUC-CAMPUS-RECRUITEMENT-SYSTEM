@@ -1,73 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {UserCodeforceRating} from '../../../actions/company/index';
+import { UserCodeforceRating } from '../../../actions/company/index';
 
 class WatchUserCodeforceRating extends Component {
     componentDidMount() {
         this.props.UserCodeforceRating(this.props.id);
     }
     render() {
-        if(!this.props.codeforce){
+        if (!this.props.codeforce) {
             return <div>No results found</div>
         }
         if (this.props.codeforce.result) {
-            return(
+            return (
                 <>
                     {
-                        this.props.codeforce.result.reverse().map((contest,index)=>{
-                            if(index<5){
+                        this.props.codeforce.result.reverse().map((contest, index) => {
+                            if (index < 1) {
                                 return (
-                                    <div className="cf">
-                                    <div>
-                                        <ul>
-                                            <li>
-                                              <h4>Contest Id</h4>
-                                            </li>
-                                            <li>
-                                              <h4>Contest Name</h4>
-                                            </li>
-                                            <li>
-                                               <h4>Contest Rank</h4>
-                                            </li>
-                                            <li>
-                                                <h4>contest New Rating</h4>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div >
-                                        <ul>
-                                            <li>
-                                               <h4>{contest.contestId}</h4>
-                                            </li>
-                                            <li>
-                                               <h4>{contest.contestName}</h4>
-                                            </li>
-                                            <li>
-                                                <h4>{contest.rank}</h4>
-                                            </li>
-                                            <li>
-                                                <h4 style={{color:'#d89216'}}>{contest.newRating}</h4></li>
-                                        </ul>
-                                    </div>
+                                    <div className="codeforce">
+                                        <div>
+                                            <div className="codeforce-rating">{contest.newRating}</div>
+                                        </div>
                                     </div>
                                 )
                             }
-                            else{
+                            else {
                                 return null;
                             }
-                            
+
                         })
                     }
                 </>
             )
-       }else {
+        } else {
             return (<div>Loading</div>)
-       }
-   }
+        }
+    }
 }
 
-const mapStateToProps = (state,ownProps) => {
-        return ({ codeforce:state.AlumniProfile.CodeForceRatings})
+const mapStateToProps = (state, ownProps) => {
+    return ({ codeforce: state.CompanyProfile.CodeForceRatings })
 }
 export default connect(mapStateToProps, {
     UserCodeforceRating

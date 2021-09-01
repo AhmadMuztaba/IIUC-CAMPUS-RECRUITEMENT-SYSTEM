@@ -51,7 +51,7 @@ class JobPost extends Component {
                             onClick={(e) => {
                                 this.HandleSubmit(e)
                             }}>Upload</button>
-                        <button onClick={(e) => {
+                        <button className="JobPost--reset"  onClick={(e) => {
                             e.preventDefault();
                             this.textRef.current.style.height = "13.5rem";
                             this.setState({ value: '', titleValue: '' })

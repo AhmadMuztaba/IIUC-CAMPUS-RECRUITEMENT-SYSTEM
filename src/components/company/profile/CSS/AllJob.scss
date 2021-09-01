@@ -1,1 +1,13 @@
 @import '../../../mixin.scss';
+.applied_user{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 1rem;
+    color: #7c7c2b;
+}
+.all_appliedUsers{
+    display: flex;
+    margin: 1rem 0;
+    padding:2rem 0;
+}
