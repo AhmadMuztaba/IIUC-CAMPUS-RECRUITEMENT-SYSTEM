@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+import Social from './file options/Social';
 import {UserWatchCompanyProfile} from '../../actions/user/index'
+import Loader from '../../utility/Loader';
 class WatchCompanyProfile extends Component {
     constructor(props) {
         super(props);
@@ -20,91 +22,62 @@ class WatchCompanyProfile extends Component {
         if(this.props.companyProfile){
             let img=new Buffer.from(this.props.companyProfile.logo.data).toString('base64');
             img=`data:image/png;base64,`+img;
-        return (<div className="show-Dashboard">
-            <div>
-                <Link to="/user/showprofile">Home</Link>
-            </div>
-            <div>
-           <img src={img} alt="logo"/>
-            </div>
-            <h1>
-                {this.props.companyProfile.company.name}
-            </h1>
-            <h2>
-                {this.props.companyProfile.established}
-            </h2>
-            <h3>
-                About Me
-             </h3>
-            <div className="quote_1">
-                “
-             </div>
-            <p className="AboutMe">
-                {this.props.companyProfile.About}
-            </p>
-            <div className="quote_2">
-                ”
-            </div>
-            <div className="line">
-            </div>
-            <h3>
-                Personal Info
-            </h3>
-            <div className="personal-info">
-                <div>
-                    <ul>
-                        <li>
-                            <h4>Name</h4>
-                        </li>
-                        <li>
-                            <h4>Established</h4>
-                        </li>
-                    </ul>
-                   
-                </div>
-                <div>
-                    <li>
-                        <h4>{this.props.companyProfile.company.name}</h4>
-                    </li>
-                    <li>
-                    <h4>{this.props.companyProfile.established}</h4>
-                    </li>
-                </div>
-            </div>
-            <h3>
-                Contact
-        </h3>
-            <div className="email-info">
-                <div className="cent">
-                    <ion-icon name="mail-open-outline" class="contact-icon"></ion-icon>
-                    <p> {this.props.companyProfile.company.email}</p>
-                </div>
-            </div>              
-            <h3>
-                Professional info
-            </h3>
-            <div className="professional-info" >
-                <div style={{ height: `${this.state.height}px`, borderRight: '1px solid #e0e0dc', verticalAlign: 'center', marginBottom: '80px' }}>
-                    <ul ref={this.sidelineRef}>
-                        {this.props.companyProfile.mission ? <li><h4>Mission</h4></li> : null}
-                        {this.props.companyProfile.vision ? <li><h4>Vision</h4></li> : null}
-                        {this.props.companyProfile.currentEmployeeNumber ? <li><h4>Current Employee Number</h4></li> : null}
-                        {this.props.companyProfile.website ? <li><h4>Website</h4></li> : null}
-                    </ul>
-                </div>
-                <div>
-                    <ul>
-                    {this.props.companyProfile.mission ? <li><h4>{this.props.companyProfile.mission}</h4></li> : null}
-                    {this.props.companyProfile.vision ? <li><h4>{this.props.companyProfile.vision}</h4></li> : null}
-                    {this.props.companyProfile.currentEmployeeNumber ? <li><h4>{this.props.companyProfile.currentEmployeeNumber}</h4></li> : null}
-                    {this.props.companyProfile.website ? <li><h4>{this.props.companyProfile.website}</h4></li> : null}
-                    </ul>
-                </div>
-            </div>     
-        </div>)
-    }
+            return (<div className="watchUser">
+                 <Link to="/user/showProfile">#HOME</Link>
+                    {this.props.companyProfile.logo ? <div><img className="watchUser__image" src={img} /></div> : null}
+            <div className="AboutSection" style={{marginLeft:0}}>
+                         <h1 className="AboutSection--heading">{this.props.companyProfile.company.name}</h1>
+                       <div className="AboutSection--me">
+                       <h3 className="AboutSection--heading-Tertiary">About Company</h3>
+                       <p className="AboutSection__aboutme">
+                       {this.props.companyProfile.About}
+                       </p>
+                       </div>
+                        <div className="AboutSection__personalInfo">
+                       <h3 className="AboutSection--heading-Tertiary">Persononal Info</h3>
+                           <div className="AboutSection__personalInfo--info">
+                                <div className="AboutSection__personalInfo--name">
+                                    <div>
+                                        Name
+                                    </div>
+                                    <div>
+                                       Established
+                                    </div>
+                                  
+                                    {this.props.companyProfile.mission ? <div>Mission</div>: null}
+                               {this.props.companyProfile.vision ? <div>vision</div> : null}
+                              {this.props.companyProfile.currentEmployeeNumber ? <div>Employee Numbers</div> : null}
+                             {this.props.companyProfile.website ?<div>Website</div>: null}
+                                
+                                </div>
+                           <div className="AboutSection__personalInfo--desc">
+                                    <div>
+                                    {this.props.companyProfile.company.name}
+                                    </div>
+                                    <div>
+                                        {this.props.companyProfile.established}
+                                    </div>
+                                    {this.props.companyProfile.mission ? <div>{this.props.companyProfile.mission}</div>: null}
+                               {this.props.companyProfile.vision ? <div>{this.props.companyProfile.vision}</div> : null}
+                              {this.props.companyProfile.currentEmployeeNumber ? <div>{this.props.companyProfile.currentEmployeeNumber}</div> : null}
+                             {this.props.companyProfile.website ?<div>{this.props.companyProfile.website}</div>: null}
+                           </div>
+                           </div>
+                       </div>  
+                    <h3 className="AboutSection--heading-Tertiary">Contact</h3>
+                       <div className="contact__box">
+                           <div className="contact__box--icon">
+                           <ion-icon name="mail-open-outline"></ion-icon>
+                           </div>
+                           <div className="contact__box--email">
+                           {this.props.companyProfile.company.email}
+                           </div>
+                       </div>       
+                    </div>
+                    {/* <Social social={this.props.companyProfile.social} website={this.props.companyProfile.website }/> */}
+                    </div>)}
     else{
-        return(<div>Loading</div>)
+        return(<Loader/>)
     }
 }
 }

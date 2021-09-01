@@ -29,9 +29,12 @@ class ShowAlumniBlog extends Component {
                         {blog.title}
                     </h4>
                     <p>{blog.description.substring(0,50)}...</p>
-                    <p>Written by <span style={{
+                <p>Written by <Link to={`/user/Alumniprofile/watch/${blog.Author._id}`}><span style={{
                         fontSize:'100%',
-                        color:'#865858'}}>{blog.Author.name}</span></p>
+                        color:'#865858'}}>{blog.Author.name}</span>
+                        </Link>
+                        </p>
+                        
                 </div></Link>)
             }):<div>Loading</div>
            }

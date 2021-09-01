@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {CompanyOwnProfile} from '../../../actions/company/index';
 import Loader from '../../../utility/Loader';
+import Social from './Social';
 class AboutMe extends React.Component {
     constructor(props) {
         super(props);
@@ -71,7 +72,7 @@ class AboutMe extends React.Component {
                </div>
            </div>       
         </div>
-        {/* <Social social={this.props.ownProfile.companyProfile.companyProfile.social} website={this.props.ownProfile.companyProfile.companyProfile.website }/> */}
+        <Social social={this.props.ownProfile.companyProfile.companyProfile.social} website={this.props.ownProfile.companyProfile.companyProfile.website }/>
         </div>
         )
     }
