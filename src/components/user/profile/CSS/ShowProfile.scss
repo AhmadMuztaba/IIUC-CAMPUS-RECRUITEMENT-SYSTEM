@@ -1,0 +1,41 @@
+.noprofile{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(
+        to right bottom
+        , #035976e3 , #000000e6),url('./images/blueBack.jpg');
+    &__welcome{
+        color:white
+    }
+    &__button{
+        display: flex;
+        &--signout,&--createprofile{
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background-color: #b09403;
+            font-size: 2rem;
+            font-family: 'Lato';
+            font-weight: 500;
+            margin: 1rem;
+            border-radius: 1rem;
+            transition: all .4s;
+            &:hover{
+                transform: translateY(-.7rem);
+                box-shadow: 0 1rem 3rem rgba($color: #000000, $alpha: .25);
+            }
+        }
+        &--signout{
+            background-color: purple;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+    
+}

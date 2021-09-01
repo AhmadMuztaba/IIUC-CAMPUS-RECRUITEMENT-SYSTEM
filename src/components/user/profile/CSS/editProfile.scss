@@ -1,0 +1,30 @@
+@import '../../../mixin.scss';
+.editProfile{
+    margin-left: 51rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include respond(tab-land){
+        margin-left: 34rem;
+    }
+    @include respond(tab-port){
+        margin-left: 1rem;
+    }
+    flex-direction: column;
+    border-radius: 2rem;
+    &__option{
+    cursor: pointer;
+    margin: 2rem;
+    padding: 2%;
+    background-color: #eae8e3;
+    width: 54rem;
+    @include respond(tab-port){
+        width: 44rem;
+    }
+    @include respond(mobile){
+        width: 40rem;
+    }
+    display: flex;
+    justify-content: center;
+    }
+}

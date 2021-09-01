@@ -1,0 +1,269 @@
+@import '../../../mixin.scss';
+.utility-mobile{
+    display: none;
+    @include respond(tab-port){
+        display: block;
+    }
+}
+
+.utility-desktop{
+    @include respond(tab-port){
+        display: none;
+    }
+}
+
+.AboutSection{
+    &__utility{
+        &-margin{
+            margin-bottom: 4rem;
+        }
+    }
+    &__btn{
+        display: flex;
+        justify-content: center;
+
+        &--add{
+            margin: 3rem;
+            cursor: pointer;
+            height: 5rem;
+            width: 8rem;
+            border-radius: 3rem;
+            font-size: 2rem;
+            border: none;
+            transition: all .5s;
+            background-color: #eaba1b;
+            font-family: cursive;
+            font-weight: 600;
+           color: #055252;
+            &:hover{
+                background-color: brown;
+                color: white;
+
+            }
+        }
+    }
+    margin-left: 34rem;
+    padding:3rem;
+    padding-top: 1rem;
+    width: 67%;
+    
+    @include respond(tab-land){
+        width: 65%;
+    }
+    @include respond(tab-port){
+        margin-left: 0;
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 2rem;
+        padding: 1rem;
+        width: 100%;
+    }
+    @include respond(small-mobile){
+        margin-left: 6rem;
+    }
+   
+    &--me{
+        &::after{
+               margin: 6rem auto;
+               @include respond(tab-port){
+                   margin: 5rem auto;
+               }
+               @include respond(mobile){
+                   margin: 2rem auto;
+               }
+                margin-top: 8rem;
+                content: "";
+                display: block;
+                width: 8rem;
+                border-bottom: .1rem solid #d89216;
+        }
+    }
+    &--heading{
+        font-size: 4rem;
+        color: #6f9eaf;
+        text-align: center;
+        margin-bottom: 1.7rem;
+        @include respond(tab-port){
+            font-size: 3.5rem;
+        }
+        @include respond(mobile){
+            font-size: 3rem;
+        }
+        &-secondary{
+            font-size:2.5rem;
+            text-align: center;
+            font-weight: 100;
+            &::after{
+                margin: 4rem auto;
+                @include respond(mobile){
+                    margin: 2rem auto;
+                }
+                content: "";
+                display: block;
+                width: 8rem;
+                border-bottom: .1rem solid #d89216;
+            }
+        }
+        &-Tertiary{
+            text-align: center;
+            margin-bottom: 4rem;
+            @include respond(mobile){
+                margin-bottom: 0;
+            }
+        }
+    }
+    &__aboutme{
+        margin-top: 3rem;
+        text-align: center;
+        line-height: 3.2rem;
+        letter-spacing: .4rem;
+        @include respond(mobile){
+            letter-spacing: .2rem;
+        }
+        margin-bottom: 3rem;
+        position: relative;
+        &::before{
+            color: #c99f16;
+            font-size: 6.5rem;
+            font-weight: 500;
+            content: "“";
+            position: absolute;
+            left: 0;
+            @include respond(tab-port){
+                left: 2.7rem;
+            }
+            top: -2rem;
+        }
+        &::after{
+            color: #c99f16;
+            font-size: 6.5rem;
+            font-weight: 500;
+            content: "”";
+            position: absolute;
+            bottom: -6rem;
+            right: 0;
+            @include respond(tab-port){
+                right: 2rem;
+                bottom: -5rem;
+            }
+            @include respond (mobile){
+                right: 6rem;
+                bottom: -4.5rem;
+            }
+            
+        }
+    }
+&__personalInfo{
+    padding-bottom: 4rem;
+    margin-bottom: 4rem;
+    &--info{
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+        font-weight: 500;
+        color: #5f7477;
+    }
+    &--name{
+        position: relative;
+       text-align: center;
+        font-size: 2.1rem;
+        margin-right: 10rem;
+        @include respond(tab-land){
+            margin-right: 6rem;
+        }
+        @include respond(mobile){
+            margin-right: 3rem;
+        }
+        &::after{
+            position: absolute;
+            display: block;
+            content: "";
+            border-right: 1px solid #e0e0dc;
+            height: 10rem;
+            top: 0;
+            right: -7rem;
+        }
+    }
+    &--desc{
+        margin-left: 10rem;
+        font-size: 2.0rem;
+    }
+}
+}
+.contact{
+    margin-left: 34rem;
+    padding:3rem;
+    padding-top: 1rem;
+    width: 67%;
+    @include respond(tab-port){
+        margin-left: 0;
+        margin: 0 auto;
+        padding: 1rem;
+        margin-top: 2rem;
+        width: 100%;
+    }
+    &--heading{
+        font-size: 4rem;
+        color: #6f9eaf;
+        text-align: center;
+        margin-bottom: 1.7rem;
+        &-Tertiary{
+            font-size: 2.7rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+    }
+ &__box{
+     display: flex;
+     @include respond(mobile){
+         margin-top: 3rem;
+     }
+    //  margin-bottom: 3rem;
+     justify-content: center;
+       &--icon{
+        font-size: 3.8rem;
+        margin-right: 2rem;
+     }
+     &--email{
+        font-size: 2.5rem;
+     }
+ }
+}
+.education{
+    &_input{
+        color:white;
+        width: 100%;
+        border-radius: 2rem;
+        text-align: center;
+        padding: 2%;
+        border: none;
+        margin: 1rem;
+        background-color: #6f9eaf;
+        &:focus{
+            outline: none;
+            box-shadow: 0 .25rem 2rem rgba($color: #000000, $alpha: .3);
+        }
+    }
+}
+.repository{
+    li{
+        margin: 1rem;
+        a{
+
+            text-decoration: none;
+            color:#c99f16;
+            &:hover{
+                font-weight: 400;
+                transition: all .2s;
+            }
+        }
+    }
+}
+.codeforce{
+    display: flex;
+    justify-content: center;
+    &-rating{
+        font-weight: 400;
+        color:#d89216!important;
+    }
+}

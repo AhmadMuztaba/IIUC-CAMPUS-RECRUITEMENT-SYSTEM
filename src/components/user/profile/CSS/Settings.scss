@@ -1,0 +1,15 @@
+@import '../../../mixin.scss';
+.settings{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 50rem;
+    width: 80%;
+    @include respond(tab-port){
+        margin-left: 1rem;
+    }
+    & label{
+        margin: 2rem;
+        width: 40%;
+    }
+}

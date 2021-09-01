@@ -1,0 +1,12 @@
+@import '../../../mixin.scss';
+.watchUser{
+    margin-top: 2rem;
+display: flex;
+@include respond(tab-port){
+    flex-direction: column;
+    align-items: center;
+}
+&__image{
+    width: 20rem;
+}
+}

@@ -1,0 +1,52 @@
+.loading{
+  background-image: linear-gradient(
+45deg
+, black, #009687a6),url('./wallpaper.jpg');
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__text{
+    color: white;
+    font-size: 2rem;
+    font-family: 'Lato';
+    font-weight: 500;
+
+  }
+  &__ripple{ 
+      display: inline-block;
+      position: relative;
+      width: 8rem;
+      height: 8rem;
+
+      & div{
+        position: absolute;
+        border: .4rem solid #fff;
+        opacity: 1;
+        border-radius: 50%;
+        animation: waterdrop 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+      }
+      & div:nth-child(2) {
+        animation-delay: -0.5s;
+      }
+  }
+}
+  @keyframes waterdrop{
+    0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacty: 0;
+    }
+  }

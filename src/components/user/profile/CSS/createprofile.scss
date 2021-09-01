@@ -1,0 +1,143 @@
+.createProfile{
+    font-size: 2.6rem;
+    background-image: linear-gradient(to right bottom,#6bb8aae0, #07021e),url(images/1.jpg);
+    padding: 4%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__formBackground{
+        width: 60rem;
+        padding: 2%;
+        position: relative;
+        &--blur{
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            filter: blur(2px);
+        }
+    }
+    &__inputtextstyle{
+        width: 100%;
+        border-radius: 2rem;
+        text-align: center;
+        padding: 2%;
+        border: none;
+        margin: 1rem;
+        &:focus{
+            outline: none;
+            box-shadow: 0 1rem 3rem rgba($color: #000000, $alpha: .3);
+        }
+    }
+    &__error{
+                width: 100%;
+                margin: 1rem;
+                margin-bottom: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #c86c82;
+                padding: 2%;
+                font-size: 2rem;
+                transition: all .6s;
+    }
+    &__checkboxinput{
+        display: none;
+        margin-left: 7rem;
+        margin-top: 7rem;
+        margin-bottom: 7rem;
+        align-items: center;
+        justify-content: center;
+        height: 5rem;
+        width: 5rem;
+        &--label{
+            margin-left: 7rem;
+            height: 11rem;
+            width: 10rem;
+        }
+    }
+
+    &__checkboxinput:checked ~ &__customisedInput &__customisedInput--checked{
+        background-color:#8e1d1d;
+        transition: all .4s;
+    }
+    
+    &__checkbox{
+        margin-bottom: 5rem;
+        &--label{
+            margin: 3rem;
+            margin-left: 0;
+            margin-right: 0;
+            display: flex;
+            justify-content: space-between;
+            &-icon{
+                font-size: 7rem;
+            }
+        }
+        display: flex;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+        transition: all .4s;
+    }
+    &__customisedInput{
+        &--flex{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        margin-left: 8rem;
+        margin-right: rem;
+        margin-bottom: 5rem;
+        position: relative;
+        display: inline-block;
+        height: 5rem;
+        width: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #c86c82;
+        border-radius: 50%;
+        &--checked{
+            position: absolute;
+            display: inline-block;
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+            background-color: beige;
+        }
+    }
+    &__btn{
+        display: flex;
+        justify-content: center;
+
+        &--add{
+            cursor: pointer;
+            height: 7rem;
+            width: 10rem;
+            border-radius: 3rem;
+            font-size: 2rem;
+            border: none;
+            transition: all .5s;
+            background-color: #eaba1b;
+            font-family: cursive;
+            font-weight: 600;
+           color: #055252;
+            &:hover{
+                background-color: brown;
+                color: white;
+
+            }
+        }
+    }
+}
+
+.utility__flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

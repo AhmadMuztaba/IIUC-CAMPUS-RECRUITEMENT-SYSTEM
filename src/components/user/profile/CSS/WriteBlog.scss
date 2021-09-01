@@ -1,0 +1,86 @@
+@import '../../../mixin.scss';
+.writeblog__flex{
+    margin-left: 20rem;
+    @include respond(tab-port){
+        margin-left: 0rem;
+    }
+    @include respond(mobile){
+        margin-left: 1rem;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.textArea{
+    resize: none;
+    line-height: 150%;
+    text-align: center;
+    vertical-align: middle;
+    border:none;
+    font-size: 200%;
+    outline:none;
+    padding:3%;  
+    margin: 4.5rem;
+    margin-left: 1rem;
+    margin-top: 0px;
+    width: 100%;
+    @include respond(tab-port){
+        width:100%;
+        font-size: 160%;
+    }
+    @include respond(mobile){
+        
+        font-size: 130%;
+    }
+    height: 13.5rem;
+    border-bottom: none;
+    margin-bottom: 0px;
+}
+.showDashboard-input{
+   border-radius: 2rem;
+   width: 100%;
+   font-size: 150%;
+   @include respond(mobile){
+       font-size: 120%;
+   }
+   display: block;
+   margin:3.5rem;
+   padding: 1%;
+   outline: none;
+   border:1px solid black;
+}
+
+.textArea::placeholder{
+    border: none;
+   font-size: 100%;
+   text-align: center;
+   outline:none;
+}
+
+.Textarea-buttons{
+    font-size: 180%;
+    @include respond(tab-port){
+        font-size: 150%;
+    }
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+}
+.textarea-buttons ion-icon{
+    margin: 1rem;
+}
+.textAreaAndButtonWrappers{
+    margin-left: auto;
+    border: 1px solid black; 
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 2rem 2rem #968c8396;
+    @include respond(tab-port){
+        box-shadow: 1rem 1rem #968c8396;
+    }
+    @include respond(mobile){
+        box-shadow: .2rem .2rem #968c8396;
+    }
+}

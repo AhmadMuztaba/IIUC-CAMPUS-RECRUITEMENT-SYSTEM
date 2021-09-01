@@ -1,0 +1,30 @@
+.WatchUserProfile{
+    display: grid;
+    grid-template-columns: 2fr 7fr;
+}
+.WatchUserProfile-quote_1{
+    color:#c99f16;
+    font-size: 350%;
+    line-height: 70%;
+    margin-left: 60px;
+    margin-right: 10px;
+    margin-bottom: -20px;
+}
+.WatchUserProfile-quote_2{
+    color: #c99f16;
+    font-size: 350%;
+    line-height: 70%;
+    margin-left: 1090px;
+    margin-top: 0px ;
+}
+.WatchUserProfile-AboutMe{
+    padding:05px 30px;
+    font-size: 130%;
+    line-height: 240%;
+    margin-left: 100px;
+}
+.WatchUserProfile-contact-icon{
+    font-size:160%;
+    margin-left: 230px;
+    margin-top: 15px;
+}

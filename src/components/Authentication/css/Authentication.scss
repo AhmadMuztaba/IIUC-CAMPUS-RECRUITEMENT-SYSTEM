@@ -1,0 +1,124 @@
+@import '../../mixin.scss';
+#tsparticles{
+    height: 100vh;
+    width: 100vw;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.login,.signup{
+    position:relative;
+    &__form{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        
+        &--login,&--signup{
+            @include respond(mobile){
+                display: none;
+            }
+            justify-self:baseline;
+            color: #ff9800;
+            flex: 0 0 30%;
+            font-weight: 600;
+            font-size: 7rem;
+
+            &-log,&-sign{
+                color: #ffeb3b;
+            }
+        }
+        
+        &--form{
+            height: 72vh;
+            width: 30vw;
+            @include respond(tab-port){
+                width: 40vw;
+            }
+            @include respond(mobile){
+                width: 60vw;
+            }
+            padding: 5%;
+            color: white;
+            border-radius: 2.5rem;
+            background-image: linear-gradient( 45deg, #3b223d, #433e3ea8),url('../texturePaper.png');
+            &--label{
+                font-size: 3rem;
+                margin-bottom: 5rem;
+            }
+            &--input{
+                width:100%;
+                margin-bottom:1rem;
+                margin-top:2rem;
+                height:4rem;
+                outline:none;
+                padding: 2%;
+
+                &:focus{
+                    box-shadow: 0 2rem 3rem rgba($color: #0e0d0d, $alpha: .25);
+                }
+            }
+            &--button{
+                display: flex;
+                font-size: 2rem;
+                padding: 2rem;
+                color: white;
+                background-color: #a58986;
+                border-radius: 2rem;
+                outline: none;
+                border: none;
+                transition: all .4s;
+                &:hover{
+                    transform: scale(1.1);
+                    background-color: #a7777e;
+                    box-shadow: 0 2rem 3rem rgba($color: #000000, $alpha: .25);
+                }
+            }
+            &--error{
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #c86c82;
+                padding: 2%;
+                font-size: 1.6rem;
+                transition: all .6s;
+            }
+        }
+    }
+}
+
+.signup{
+    &__form{
+        &--form{
+            font-size: 5rem;
+            padding: 4%;
+            padding-top: 2%;
+            font-size: 4rem;
+            height: 80vh;
+            &--input{
+                margin-top: 0;
+                margin-bottom: 0;
+                font-size: 1.9rem;
+                margin-bottom: 1rem;
+            }
+            &--label{
+                font-size: 2.5rem;
+            }
+            &--button{
+                font-size: 1.7rem;
+                padding: 1.7rem;
+            }
+            &--error{
+
+            }
+        }
+    }
+}

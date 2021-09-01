@@ -1,0 +1,67 @@
+.TextAreaComment{
+    resize: none;
+    line-height: 150%;
+    text-align: center;
+    vertical-align: middle;
+    border:none;
+    font-size: 200%;
+    outline:none;
+    padding:3%;  
+    margin: 15px;
+    width: 60vw;
+    margin-bottom: 20px;
+    outline: none;
+    border:none;
+    border-radius: 20px;
+}
+.TextAreaComment input[type=text]{
+    border: none;
+}
+.userBlog-comment{
+    margin: 20px;
+    margin-left: 30px;
+    border: 1px solid black;
+    width: 70vw;
+    border-radius: 20px;
+}
+.UserBlogcomment-button{
+    background-color: #a3d2ca;
+    font-size: 90%;
+    height:60px;
+    width: 100px;
+    border-radius: 20px;
+}
+.All-comments{
+    margin:80px;
+    margin-left: 30px;
+}
+.EachComment{
+    background-color: #f3f4ed;
+    /* margin: 20px; */
+    margin-top: 30px;
+    padding: 3%;
+}
+.EachComment ul ion-icon{
+    font-size: 150%;
+}
+.EachComment ul li:first-child{
+   margin-top: 10px;
+}
+.EachComment ul li:last-child{
+    text-align: center;
+    margin-left: 15px;
+    padding: 0px;
+}
+.EachComment ul li h4{
+    padding: 0px;
+    margin: 0px;
+}
+.EachComment ul li{
+    display: inline-block;
+    margin: 0px;
+}
+.EachComment ul {
+    justify-content: center;
+    margin: 20px;
+    vertical-align: middle;
+}

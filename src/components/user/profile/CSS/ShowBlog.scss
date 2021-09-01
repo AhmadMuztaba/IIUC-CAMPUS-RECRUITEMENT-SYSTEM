@@ -1,0 +1,33 @@
+@import '../../../mixin.scss';
+.userBlog,.alumniBlog{
+    display: flex;
+    justify-content: center;
+    margin-left: 34rem;
+    @include respond(tab-port){
+        margin-left: 2rem;
+    }
+    @include respond(mobile){
+        margin-left: 1rem;
+    }
+    padding:3rem;
+    flex-direction: column;
+    padding-top: 1rem;
+    width: 67%;
+    &__EachBlog{
+        padding: 2rem;
+        width: 83rem;
+        @include respond(tab-land){
+            width: 70rem
+        }
+        @include respond(tab-port){
+            width: 58rem;
+        }
+        @include respond(mobile){
+            width: 43rem;
+        }
+    font-size: 120%;
+    background-color:#f3f4ed;
+    color:#435560;
+    margin: 1rem;
+    }
+}

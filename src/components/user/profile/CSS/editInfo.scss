@@ -1,0 +1,87 @@
+@import '../../../mixin.scss';
+.animation{
+animation:aboutinfo .5s;
+}
+.editInfo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    &__checkbox{
+        margin: 2rem;
+         margin-bottom: 0rem;
+         width: 52rem;
+         @include respond(tab-port){
+             width: 36rem;
+         }
+         @include respond(mobile){
+             width: 36rem;
+         }
+         overflow: hidden;
+    }
+    &__fields{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        font-family: 'lato';
+        
+        & label{
+            width: 40rem;
+            padding: 2rem;
+            margin: 2rem;
+            font-size: 2.4rem;
+            margin-left: 0;
+        }
+        & select{
+            color: rgb(143, 143, 132);
+            display: flex;
+            justify-content: center;
+            font-size: 2rem;
+            padding: 2rem;
+            width: 60rem;
+            @include respond(mobile){
+                width: 36rem;
+            }
+            height: 7rem;
+            border: 1px solid #bfd2ca;
+            margin-left: 1rem;
+            border-radius: 3rem;
+            margin-bottom: 0;
+            outline: none;
+            &:focus{
+                outline: none;
+                box-shadow: 0 1rem 3rem rgba($color: #000000, $alpha: .25);
+            }
+        }
+        & input{
+            color: rgb(143, 143, 132);
+            font-size: 2.2rem;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+            width: 60rem;
+            @include respond(mobile){
+                width: 36rem;
+            }
+            height: 4rem;
+            border: 1px solid #bfd2ca;
+            margin-left: 1rem;
+            border-radius: 3rem;
+            margin-bottom: 0;
+            outline: none;
+            &:focus{
+                outline: none;
+                box-shadow: 0 1rem 3rem rgba($color: #000000, $alpha: .25);
+            }
+        }
+    }
+}
+@keyframes aboutinfo{
+    0%{
+        transform: translateX(40rem);
+    }
+    
+    100%{
+        transform: translateX(0);
+    }
+}
