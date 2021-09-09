@@ -193,19 +193,13 @@ router.get('/company/search/user',companyAuth,async(req,res)=>{
 })
 
 //search for user with specific skills
-//request should be localhost:3000/search/specificUser?skills[]=android&skills[]=web like this(user query-string to http request)
+
 //verified
 router.get('/search/specificUser', companyAuth, async (req, res) => {
     try {
         
         let match = [];
         match = req.query.skills;
-        // if (req.query.skills) {
-        //     match.skills = req.query.skills;
-        // }
-        // const user = await User.aggregate([{ $match: {skills:["web","code"]}}]).exec();
-
-        //finding Users According to their skills
         const user = await UserProfile.find({ 'skills': { $in: match } }).populate('user');
         res.status(200).send({user});
     }
@@ -270,6 +264,26 @@ router.get('/profile/:id/codeforceRatings',companyAuth,async(req,res)=>{
         res.status(200).send(response.data);
     }catch(err){
         res.status(400).send({err:err.message});
+    }
+})
+
+
+//user codeforce info
+router.get('/profile/:id/codeforceUserInfo',companyAuth,async(req,res)=>{
+    try{
+        const user=await UserProfile.findOne({user:req.params.id});
+        if(!user.codeforceusername){
+            throw new Error('User didn\'t provide codeforce user name');
+        }
+        console.log(user.codeforceusername);
+        const response=await axios.get('https://codeforces.com/api/user.info',{
+            params:{
+                handles:`${user.codeforceusername}`
+            }
+        });
+        res.status(200).send(response.data);
+    }catch(err){
+        res.status(400).send({err:err.response.data});
     }
 })
 

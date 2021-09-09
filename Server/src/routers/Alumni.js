@@ -148,6 +148,24 @@ router.get('/alumni/watch/user/:id/cfRatings',AlumniAuth,async(req,res)=>{
     }
 })
 
+//showing codeforce user info
+//verified
+router.get('/alumni/watch/user/:id/cfInfo',AlumniAuth,async(req,res)=>{
+    try{  
+        const user=await UserProfile.findOne({user:req.params.id});
+        if(!user.codeforceusername){
+            throw new Error('User didn\'t provide codeforce user name');
+        }
+        const response=await axios.get('https://codeforces.com/api/user.info',{
+            params:{
+                handles:`${user.codeforceusername}`
+            }
+        });
+        res.status(200).send(response.data);
+    }catch(err){
+        res.status(400).send({err:err.response.data});
+    }
+})
 
 
 

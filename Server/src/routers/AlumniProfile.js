@@ -92,6 +92,25 @@ router.get('/profile/alumni/cfRatings',AlumniAuth,async(req,res)=>{
     }
 })
 
+//alumni codeforce info
+//verified
+router.get('/profile/alumni/cfInfo',AlumniAuth,async(req,res)=>{
+    try{
+        const user=await AlumniProfile.findOne({alumni:req.user._id});
+        if(!user.codeforceusername){
+            throw new Error('User didn\'t provide codeforce user name');
+        }
+        const response=await axios.get('https://codeforces.com/api/user.info',{
+            params:{
+                handles:`${user.codeforceusername}`
+            }
+        });
+        res.status(200).send(response.data);
+    }catch(err){
+        res.status(400).send({err:err.response.data});
+    }
+})
+
 //upload pro pic
 //verified
 router.post('/profile/alumni/profile/me',upload.single('profilePic'),AlumniAuth,async(req,res)=>{

@@ -264,6 +264,35 @@ router.get('/user/watch/alumni/cfrating/:id',auth,async(req,res)=>{
     }
 })
 
+//showing codeforce user info of alumni
+//verified
+router.get('/user/watch/alumni/cfInfo/:id',auth,async(req,res)=>{
+    try{  
+        const user=await AlumniProfile.findOne({alumni:req.params.id});
+        if(!user.codeforceusername){
+            throw new Error('User didn\'t provide codeforce user name');
+        }
+        const response=await axios.get('https://codeforces.com/api/user.info',{
+            params:{
+                handles:`${user.codeforceusername}`
+            }
+        });
+        res.status(200).send(response.data);
+    }catch(err){
+        res.status(400).send({err:err.response.data});
+    }
+})
+
+//Codeforce All problem Set
+router.get('/user/codeforceAllProblemSet',auth,async(req,res)=>{
+    try{
+        const response=await axios.get('https://codeforces.com/api/problemset.problems?tags=implementation');
+        res.status(200).send(response.data);
+    }catch(err){
+        res.status(400).send({err:err.response.data});
+    }
+})
+
 //watching AlumniProfile
 //verified
 router.get('/profile/watch/alumni/:id',auth,async(req,res)=>{

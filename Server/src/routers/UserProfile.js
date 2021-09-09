@@ -83,6 +83,27 @@ router.get('/profile/me/codeforceRatings',auth,async(req,res)=>{
     }
 })
 
+//codeforce user info
+//verified
+router.get('/profile/me/codeforceUserInfo',auth,async(req,res)=>{
+    try{  
+        const user=await UserProfile.findOne({user:req.user._id});
+        if(!user.codeforceusername){
+            throw new Error('User didn\'t provide codeforce user name');
+        }
+        const response=await axios.get('https://codeforces.com/api/user.info',{
+            params:{
+                handles:`${user.codeforceusername}`
+            }
+        });
+        res.status(200).send(response.data);
+    }catch(err){
+        res.status(400).send({err:err.response.data});
+    }
+})
+
+
+
 
 //posting info
 //verified
