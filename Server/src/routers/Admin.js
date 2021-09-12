@@ -15,7 +15,9 @@ const CompanyProfile=require('../models/CompanyProfile');
 const AlumniBlogComments=require('../models/AlumniBlogComments');
 const UserBlogComments=require('../models/UserBlogComments');
 const UserProfile=require('../models/UserProfile');
+const ContestRanking=require('../models/ContestRankings');
 const axios=require('axios');
+
 
 //me
 router.get('/admin/me',AdminAuth,async(req,res)=>{
@@ -36,7 +38,62 @@ router.post('/signup/admin',async(req,res)=>{
         const token=await admin.authTok();
         res.status(201).send({admin,token});
     }catch(err){
-        res.status(400).send(err.message);
+        res.status(400).send({err:err.message});
+    }
+});
+
+//Get contest Ranking
+//not just for user
+router.get('/contestRanking',async(req,res)=>{
+    try{
+        const ranks=await ContestRanking.find({}).populate('first second third').exec();
+        res.status(200).send(ranks);
+    }catch(err){
+        res.status(400).send({err:err.message})
+    }
+})
+//edit contest ranking
+router.patch('/constestRanking/:contestid',AdminAuth,async(req,res)=>{
+    try{
+        const {first,second,third,date}=req.body;
+        const contest=await ContestRanking.findOne({_id:req.params.contestid});
+        if(first){
+            contest.first=first;
+        }
+        if(second){
+            contest.second=second;
+        }if(third){
+            contest.third=third;
+        }if(date){
+            contest.date=date;
+        }
+        const ranks=await contest.save();
+        console.log(ranks);
+        res.status(201).json(ranks);
+    }catch(err){
+        res.status(400).send({err:err.message});
+    }
+})
+
+
+//Post Contest Ranking
+//
+router.post('/contestRanking',AdminAuth,async(req,res)=>{
+    try{
+        const {first,second,third,date}=req.body;
+        if(!first||!second||!third||!date){
+            throw new Error('fist,second,third and date needed');
+        }
+        const ranking=new ContestRanking({
+            first,
+            second,
+            third,
+            date
+        })
+        await ranking.save();
+        res.status(201).send(ranking);
+    }catch(err){
+        res.status(400).send({err:err.message});
     }
 })
 

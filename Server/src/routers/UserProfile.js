@@ -7,6 +7,25 @@ const sharp=require('sharp');
 const router = express.Router();
 const auth = require('../middleware/auth');
 require('dotenv').config();
+const ContestRanking=require('../models/ContestRankings');
+
+//Get the Reputation point of an user
+//30 points for first
+//20 for second
+//10 for third
+router.get('/user/me/reputation',auth,async(req,res)=>{
+    try{
+        const profile=await UserProfile.findOne({user:req.user._id});
+        const first=await ContestRanking.countDocuments({first:profile._id});
+        const second=await ContestRanking.countDocuments({second:profile._id});
+        const third=await ContestRanking.countDocuments({third:profile._id});
+        const total=(first*30)+(second*20)+(third*10);
+        res.status(200).json(total);
+    }catch(err){
+        res.status(400).send({err:err.message});
+    }
+})
+
 
 //showing own profilePic
 //verified

@@ -17,6 +17,7 @@ const UserProfile=require('../models/UserProfile');
 const AlumniProfile = require('../models/AlumniProfile');
 const sgMail=require('@sendgrid/mail');
 const axios=require('axios');
+const ContestRanking=require('../models/ContestRankings');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 //forgot password
@@ -164,6 +165,20 @@ router.get('/alumni/watch/user/:id/cfInfo',AlumniAuth,async(req,res)=>{
         res.status(200).send(response.data);
     }catch(err){
         res.status(400).send({err:err.response.data});
+    }
+})
+
+//watch reputaion of an user
+router.get('/alumni/watch/user/:userId/reputation',AlumniAuth,async(req,res)=>{
+    try{
+        const profile=await UserProfile.findOne({user:req.params.userId});
+        const first=await ContestRanking.countDocuments({first:profile._id});
+        const second=await ContestRanking.countDocuments({second:profile._id});
+        const third=await ContestRanking.countDocuments({third:profile._id});
+        const total=(first*30)+(second*20)+(third*10);
+        res.status(200).json(total);
+    }catch(err){
+        res.status(400).send({err:err.message});
     }
 })
 
