@@ -55,20 +55,45 @@ router.get('/contestRanking',async(req,res)=>{
 //edit contest ranking
 router.patch('/constestRanking/:contestid',AdminAuth,async(req,res)=>{
     try{
-        const {first,second,third,date}=req.body;
+        const {first,second,third,date,description}=req.body;
         const contest=await ContestRanking.findOne({_id:req.params.contestid});
         if(first){
-            contest.first=first;
+            const firstUser=await User.findOne({email:first});
+            if(!firstUser){
+                throw new Error('User not found');
+            }
+            const firstUserProfile=await UserProfile.findOne({user:firstUser._id});
+            if(!firstUserProfile){
+                throw new Error('User Profile not found');
+            }
+            contest.first=firstUserProfile._id;
         }
         if(second){
-            contest.second=second;
+            const secondUser=await User.findOne({email:second});
+            if(!secondUser){
+                throw new Error('User not found');
+            }
+        const secondUserProfile=await UserProfile.findOne({user:secondUser._id});
+        if(!secondUserProfile){
+            throw new Error('User Profile not found');
+        }
+            contest.second=secondUserProfile._id;
         }if(third){
-            contest.third=third;
+            const thirdUser=await User.findOne({email:third});
+            if(!thirdUser){
+                throw new Error('User not found');
+            }
+            const thirdUserProfile=await UserProfile.findOne({user:thirdUser._id});
+            if(!thirdUserProfile){
+                throw new Error('User Profile not found');
+            }
+            contest.third=thirdUserProfile._id;
         }if(date){
             contest.date=date;
+        }if(description){
+            contest.description=description;
         }
         const ranks=await contest.save();
-        console.log(ranks);
         res.status(201).json(ranks);
     }catch(err){
         res.status(400).send({err:err.message});
@@ -80,15 +105,40 @@ router.patch('/constestRanking/:contestid',AdminAuth,async(req,res)=>{
 //
 router.post('/contestRanking',AdminAuth,async(req,res)=>{
     try{
-        const {first,second,third,date}=req.body;
-        if(!first||!second||!third||!date){
-            throw new Error('fist,second,third and date needed');
+        const {first,second,third,date,description}=req.body;
+        if(!first||!second||!third||!date||!description){
+            throw new Error('fist,second,third,date and description are needed');
+        }
+        const firstUser=await User.findOne({email:first});
+        if(!firstUser){
+            throw new Error('First User not found');
+        }
+        const firstUserProfile=await UserProfile.findOne({user:firstUser._id});
+        if(!firstUserProfile){
+            throw new Error('First User Profile not found');
+        }
+        const secondUser=await User.findOne({email:second});
+        if(!secondUser){
+            throw new Error('Second User not found');
+        }
+        const secondUserProfile=await UserProfile.findOne({user:secondUser._id});
+        if(!secondUserProfile){
+            throw new Error('Second User Profile not found');
+        }
+        const thirdUser=await User.findOne({email:third});
+        if(!thirdUser){
+            throw new Error('Third User not found');
+        }
+        const thirdUserProfile=await UserProfile.findOne({user:thirdUser._id});
+        if(!thirdUserProfile){
+            throw new Error('Third User Profile not found');
         }
         const ranking=new ContestRanking({
-            first,
-            second,
-            third,
-            date
+            first:firstUserProfile._id,
+            second:secondUserProfile._id,
+            third:thirdUserProfile._id,
+            date:date,
+            description:description
         })
         await ranking.save();
         res.status(201).send(ranking);
