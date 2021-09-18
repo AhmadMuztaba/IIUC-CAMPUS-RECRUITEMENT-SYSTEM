@@ -322,7 +322,7 @@ router.get('/profile/watch/company/:id',auth,async(req,res)=>{
 //my applied jobs
 router.get('/my/appliedjobs',auth,async(req,res)=>{
     try{
-        const jobs=await JobPost.find({'appliedUsers.user':req.user._id}).select('-appliedUsers');
+        const jobs=await JobPost.find({'appliedUsers.user':req.user._id}).populate('Author').select('-appliedUsers').exec();
         res.status(200).send(jobs);
     }catch(err){
         res.status({err:err.message});

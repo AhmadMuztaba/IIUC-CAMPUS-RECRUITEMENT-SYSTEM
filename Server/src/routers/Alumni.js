@@ -91,6 +91,29 @@ router.get('/search/user',AlumniAuth,async(req,res)=>{
     }
 })
 
+//search alumni
+router.get('/search/alumni',AlumniAuth,async(req,res)=>{
+    try{
+        const alumni=await Alumni.find({name:new RegExp(req.query.search,'i')});
+        res.status(200).send({alumni});
+    }catch(err){
+
+    }
+})
+
+//Watching Alumni Profile
+router.get('/alumni/watch/alumni/:alumniid',AlumniAuth,async(req,res)=>{
+    try{
+        const alumni=await AlumniProfile.findOne({alumni:req.params.alumniid}).select('-profilePic').populate('alumni').exec();
+        if(!alumni){
+            throw new Error('Alumni did not create any profile yet');
+        }
+        res.status(200).send({alumni})
+    }catch(err){
+        res.status(400).send({err:err.message});
+    }
+})
+
 //watching users profile
 //id=userId
 //verified
