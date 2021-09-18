@@ -319,6 +319,17 @@ router.get('/profile/watch/company/:id',auth,async(req,res)=>{
         res.status(400).send({err:err.message});
     }
 })
+//my applied jobs
+router.get('/my/appliedjobs',auth,async(req,res)=>{
+    try{
+        const jobs=await JobPost.find({'appliedUsers.user':req.user._id}).select('-appliedUsers');
+        res.status(200).send(jobs);
+    }catch(err){
+        res.status({err:err.message});
+    }
+})
+
+
 
 //find All Jobs
 //verified

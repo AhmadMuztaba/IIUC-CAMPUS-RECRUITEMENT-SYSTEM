@@ -194,7 +194,6 @@ router.get('/company/search/user',companyAuth,async(req,res)=>{
 })
 
 //search for user with specific skills
-
 //verified
 router.get('/search/specificUser', companyAuth, async (req, res) => {
     try {
