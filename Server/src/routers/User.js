@@ -16,9 +16,12 @@ const auth = require('../middleware/auth');
 const UserProfile = require('../models/UserProfile');
 const jwt=require('jsonwebtoken');
 const axios=require('axios');
+const {check,validationResult}=require('express-validator');
 const sgMail=require('@sendgrid/mail');
+const TemporaryUser=require('../models/TemporaryUser');
+const bcrypt=require('bcrypt');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
+var emailRoute=process.env.FORGOT_EMAIL_USER_ROUTE;
 //me
 //verified
 router.get('/user/me',auth,async(req,res)=>{
@@ -217,7 +220,48 @@ router.get('/blog/alumni/:id/user',auth,async(req,res)=>{
         res.status(400).send({err:err.message});
     }
 })
+//showing codeforce rating of another user
+router.get('/user/watch/user/cfrating/:id',auth,async(req,res)=>{
+    try{  
+        const user=await AlumniProfile.findOne({user:req.params.id});
+        if(!user.codeforceusername){
+            throw new Error('User didn\'t provide codeforce user name');
+        }
+        const response=await axios.get('https://codeforces.com/api/user.rating',{
+            params:{
+                handle:`${user.codeforceusername}`
+            }
+        });
+        res.status(200).send(response.data);
+    }catch(err){
+        res.status(400).send({err:err.message});
+    }
+})
 
+
+//showing github repos of another user
+router.get('/user/watch/user/githubrepo/:id',auth,async(req,res)=>{
+    try {
+        const user = await UserProfile.findOne({ user:req.params.id});
+        const githubUserName = user.githubusername;
+        const tok=process.env.GITHUB_ACCESS_TOKEN;
+        const response = await axios.get(`https://api.github.com/users/${githubUserName}/repos`, {
+            headers: {
+                'Authorization': `token ${tok}`
+            },
+            params:{
+                sort:{
+                    'created':'asc'
+                }
+            }
+        })
+        const repository=response.data;
+        res.status(200).send(repository);
+    } catch (err) {
+        console.log(err);
+        res.status(400).send({ err: err.message });
+    }
+})
 
 //showing github repos of an alumni
 //verified
@@ -292,6 +336,20 @@ router.get('/user/codeforceAllProblemSet',auth,async(req,res)=>{
     }
 })
 
+//watching User Profile
+//id=userid
+router.get('/profile/watch/user/:id',auth,async(req,res)=>{
+    try{
+        const user=await UserProfile.findOne({user:req.params.id}).select('-profilePic').populate('user').exec();
+        if(!user){
+            throw new Error('No user Found');
+        }
+        res.status(200).send(user);
+    }catch(err){
+        res.status(400).send({err:err.message})
+    }
+})
+
 //watching AlumniProfile
 //verified
 router.get('/profile/watch/alumni/:id',auth,async(req,res)=>{
@@ -357,7 +415,7 @@ router.get('/allJobs',auth,async(req,res)=>{
 router.get('/user/forgotPassword',async(req,res)=>{
     try{
         const tok=req.query.forget;
-        const decode=await jwt.decode({tok},process.env.FORGOT_PASSWORD);
+        const decode=await jwt.verify(tok,process.env.FORGOT_PASSWORD);
         if(!decode){
             throw new Error('Sent the request again');
         }
@@ -386,15 +444,14 @@ router.post('/user/forgotPassword',async(req,res)=>{
     await user.save();
      const msg = {
         to: `${user.email}`, // Change to your recipient
-        from: 'a.m.ahmadmuztaba@gmail.com', // Change to your verified sender
-        subject: 'Demo Project password reset',
+        from: process.env.VERIFIED_SENDER, // Change to your verified sender
+        subject: 'IIUC Campus Recruitement System password reset',
         text: 'Don\'t forget your password ever again',
-        html: `<a href='http://192.168.31.169:5000/user/forgetPassword/?forgot=${token}'>email</a>`,
+        html: `<a href='${emailRoute}/${token}'>email</a>`,
       }
      const sent=await sgMail.send(msg);
      if(sent){
-         console.log('email sent');
-         res.status(200).send();
+         res.status(200).send('email sent');
      }
     }
     catch(err){
@@ -404,10 +461,22 @@ res.status(400).send({err:err.message});
 
 //SignUp User
 //verified
-router.post('/user/signUp', async (req, res) => {
+router.post('/user/signUp',[check('email','Email is required').isEmail(),
+check('name','name is required').not().isEmpty(),
+check('password','minimum 6 letters password required').isLength({min:6})
+ ],async (req, res) => {
+     const errors=validationResult(req);
+     if(!errors.isEmpty()){
+         res.status(400).json({err:errors.array()})
+     }
     try {
-        const user = new User(req.body);
-        const token = await user.getAuthToken();
+        const {name,email,password}=req.body;
+        const user=new TemporaryUser({
+            name:name,
+            email:email,
+            password:password
+        })
+        await user.save();
         // const msg = {
         //     to: `${user.email}`, // Change to your recipient
         //     from: 'a.m.ahmadmuztaba@gmail.com', // Change to your verified sender
@@ -418,8 +487,7 @@ router.post('/user/signUp', async (req, res) => {
         //  if(!sent){
         //     console.log('mail can\'t be sent');
         // }
-        await user.save();
-        res.status(201).send({ user, token });
+        res.status(201).send('Your request has been transferred to the admin');
     }
     catch (err) {
         console.log(err.message);
@@ -613,11 +681,14 @@ router.post('/job/user/:id',auth,async(req,res)=>{
 router.patch('/user/me/passwordChange',auth,async(req,res)=>{
     try{
       let user=req.user;
-      if(req.body.password){
-          user.password=req.body.password;
-      }
-      await user.save();
-      res.status(200).send({user});
+      if(req.body.password && req.body.password.length>=6){
+        req.body.password=await bcrypt.hash(req.body.password,8);
+        user.password=req.body.password;
+        await user.save();
+        res.status(200).send({user});
+       }else{
+           res.status(400).send('password didn\'t change');
+       }
     }catch(err){
          res.status(400).send({err:err.message});
     }

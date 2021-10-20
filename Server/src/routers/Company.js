@@ -11,14 +11,16 @@ const JobPost=require('../models/JobPost');
 const CompanyProfile = require('../models/CompanyProfile');
 const sgMail=require('@sendgrid/mail');
 const ContestRanking=require('../models/ContestRankings');
+const {check,validationResult}=require('express-validator');
+const bcrypt=require('bcrypt');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
+var route_email=process.env.FORGOT_EMAIL_USER_ROUTE;
 //forgot password
 //have to send with the token that was sent via email
 router.get('/comapany/forgotPassword',async(req,res)=>{
     try{
         const tok=req.query.forget;
-        const decode=await jwt.decode({tok},process.env.FORGOT_PASSWORD);
+        const decode=await jwt.verify(tok,process.env.FORGOT_PASSWORD);
         if(!decode){
             throw new Error('Sent the request again');
         }
@@ -47,10 +49,10 @@ router.post('/company/forgotPassword',async(req,res)=>{
     await user.save();
      const msg = {
         to: `${user.email}`, // Change to your recipient
-        from: 'a.m.ahmadmuztaba@gmail.com', // Change to your verified sender
-        subject: 'Demo Project password reset',
+        from:process.env.VERIFIED_SENDER, // Change to your verified sender
+        subject: 'IIUC Capmpus Recruitement System password reset',
         text: 'Don\'t forget your password ever again',
-        html: `<a href='http://192.168.31.169:5000/user/forgetPassword/?forgot=${token}'>email</a>`,
+        html: `<a href='${route_email}/${token}'>email</a>`,
       }
      const sent=await sgMail.send(msg);
      if(sent){
@@ -76,9 +78,21 @@ router.get('/company/me',companyAuth,async(req,res)=>{
 
 //signUp
 //verified
-router.post('/temporary/company/signup', async (req, res) => {
+router.post('/temporary/company/signup',[check('email','use valid email').isEmail(),
+check('password','must be 6 characters').isLength({min:6}),
+check('name','name is required')
+],async (req, res) => {
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        res.status(400).send({err:errors.array()})
+    }
     try {
-        const temp = new TempCompany(req.body);
+        const {name,email,password}=req.body;
+        const temp = new TempCompany({
+            name:name,
+            password:password,
+            email:email
+        });
        await temp.save();
         let temp1=temp;
         temp1.password=undefined;
@@ -351,6 +365,24 @@ router.patch('/company/jobpost/:id',companyAuth,async(req,res)=>{
     }
 })
 
+
+//chaging password
+//
+router.patch('/company/me/passwordChange',companyAuth,async(req,res)=>{
+    try{
+      let user=req.user;
+      if(req.body.password && req.body.password.length>=6){
+        req.body.password=await bcrypt.hash(req.body.password,8);
+        user.password=req.body.password;
+        await user.save();
+        res.status(200).send({user});
+       }else{
+           res.status(400).send('password didn\'t change');
+       }
+    }catch(err){
+         res.status(400).send({err:err.message});
+    }
+})
 
 //delete job post
 //verified

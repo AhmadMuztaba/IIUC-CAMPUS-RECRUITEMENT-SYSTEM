@@ -1,7 +1,6 @@
 const express=require('express');
 const app=express();
 const cors=require('cors');
-
 const connectDB=require('./src/db/connection');
 connectDB();
 const User=require('./src/routers/User');
@@ -14,6 +13,7 @@ const Admin=require('./src/routers/Admin');
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 5000;

@@ -15,7 +15,9 @@ const CompanyProfile=require('../models/CompanyProfile');
 const AlumniBlogComments=require('../models/AlumniBlogComments');
 const UserBlogComments=require('../models/UserBlogComments');
 const UserProfile=require('../models/UserProfile');
+const {check,validationResult}=require('express-validator')
 const ContestRanking=require('../models/ContestRankings');
+const TemporaryUser=require('../models/TemporaryUser');
 const axios=require('axios');
 
 
@@ -31,9 +33,21 @@ router.get('/admin/me',AdminAuth,async(req,res)=>{
 
 //Admin SignUp
 //verified
-router.post('/signup/admin',async(req,res)=>{
-    try{
-        const admin=new Admin(req.body);
+router.post('/signup/admin',[check('email','use valid email').isEmail(),
+check('password','must be 6 characters password').isLength({min:6}),
+check('name','name is required')
+], async (req, res) => {
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        res.status(400).send({err:errors.array()})
+    }
+    try {
+        const {name,email,password}=req.body;
+        const admin=new Admin({
+            name:name,
+            email:email,
+            password:password
+        });
         await admin.save();
         const token=await admin.authTok();
         res.status(201).send({admin,token});
@@ -283,6 +297,18 @@ router.get('/admin/search/company',AdminAuth,async(req,res)=>{
     }
 })
 
+
+//how many user's to accept
+
+router.get('/temporary/user',AdminAuth,async(req,res)=>{
+    try{
+        const tempUsers=await TemporaryUser.find({}).select('-password');
+        res.status(200).send(tempUsers);
+    }catch(err){
+        res.status(400).send({err:err.message});
+    }
+})
+
 //how many Alumnis to accept
 //verified
 router.get('/temporary/alumni',AdminAuth,async(req,res)=>{
@@ -302,6 +328,35 @@ router.get('/temporary/company',AdminAuth,async(req,res)=>{
         res.status(200).send(tempCompany);
     }catch(err){
         res.status(400).send({err:err.message});
+    }
+})
+
+
+//user's Id accept
+router.get('/user/:id/yes/signup',AdminAuth,async(req,res)=>{
+    try{
+        const temp=await TemporaryUser.findOne({_id:req.params.id});
+        const user=new User({
+            name:temp.name,
+            password:temp.password,
+            email:temp.email
+        });
+        await user.save();
+        await TemporaryUser.deleteOne({_id:req.params.id});
+        res.status(201).send({user});
+    }catch(err){
+        res.status(400).send({ err: err.message });
+    }
+})
+
+
+//users Id decline
+router.get('/user/:id/No/signup',AdminAuth,async (req, res) => {
+    try {
+         await TemporaryUser.findByIdAndRemove(req.params.id);
+         res.status(201).send();
+    } catch (err) {
+         res.status(400).send({ err: err.message });
     }
 })
 

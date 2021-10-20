@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt=require('bcrypt');
-const TemporaryCompanySchema = new mongoose.Schema({
+const TemporaryUserSchema = new mongoose.Schema({
                 name: {
                     type: String,
                     required:true,
@@ -18,8 +18,7 @@ const TemporaryCompanySchema = new mongoose.Schema({
                 timestamps:true
             }
 )
-
-TemporaryCompanySchema.pre('save',async function(next){
+TemporaryUserSchema.pre('save',async function(next){
     const temp=this;
    if(temp.isModified('password')){
         temp.password=await bcrypt.hash(temp.password,8);
@@ -27,5 +26,5 @@ TemporaryCompanySchema.pre('save',async function(next){
     next();
 })
 
-const TemporaryCompany = new mongoose.model("Temporary Company", TemporaryCompanySchema);
-module.exports = TemporaryCompany;
+const TemporaryUser = new mongoose.model("Temporary User", TemporaryUserSchema);
+module.exports = TemporaryUser;
