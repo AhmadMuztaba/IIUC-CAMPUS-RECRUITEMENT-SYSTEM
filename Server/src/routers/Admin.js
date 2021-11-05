@@ -60,7 +60,10 @@ check('name','name is required')
 //not just for user
 router.get('/contestRanking',async(req,res)=>{
     try{
-        const ranks=await ContestRanking.find({}).populate('first second third').exec();
+        const ranks=await ContestRanking.find({}).populate({
+            path:'first second third',
+              populate:'user'
+          }).exec();
         res.status(200).send(ranks);
     }catch(err){
         res.status(400).send({err:err.message})
