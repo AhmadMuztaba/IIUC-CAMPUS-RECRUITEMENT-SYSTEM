@@ -146,7 +146,8 @@ router.post('/profile/me', auth, async (req, res) => {
         const userprofile=await UserProfile.findOne({user:req.user._id});
         const {
             company, skills, location, bio, status, website, githubusername,codeforceusername,
-             youtube, facebook, instagram, twitter, linkedin,dateOfBirth,nationality
+             youtube, facebook, instagram, twitter, linkedin,dateOfBirth,nationality,
+             achievements
         } = req.body;
         if(!userprofile){
             const profile = {};
@@ -183,8 +184,11 @@ router.post('/profile/me', auth, async (req, res) => {
             }
             if (skills) {
                 profile.skills = skills.split(',').map((skill) => {
-                    return skill.trim();
+                    return skill.trim().toLowerCase();
                 });
+            }
+            if(achievements){
+                profile.achievements=achievements;
             }
             profile.social = {};
             if (youtube) {
@@ -378,7 +382,7 @@ router.patch('/profile/me', auth, async (req, res) => {
         const userprofile = await UserProfile.findOne({ user: req.user._id });
         const {
             company, skills, location, bio, status, website, githubusername,codeforceusername,
-             youtube, facebook, instagram, twitter, linkedin,dateOfBirth,nationality
+             youtube, facebook, instagram, twitter, linkedin,dateOfBirth,nationality,achievements
         } = req.body;
         if(dateOfBirth){
             userprofile.dateOfBirth=dateOfBirth
@@ -394,6 +398,9 @@ router.patch('/profile/me', auth, async (req, res) => {
         }
         if (location) {
             userprofile.location = location;
+        }
+        if(achievements){
+            userprofile.achievements=achievements;
         }
         if (status) {
             userprofile.status = status;
@@ -412,7 +419,7 @@ router.patch('/profile/me', auth, async (req, res) => {
         }
         if (skills) {
             userprofile.skills = skills.split(',').map((skill) => {
-                return skill.trim();
+                return skill.trim().toLowerCase();
             });
         }
         if (youtube) {

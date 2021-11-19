@@ -25,6 +25,7 @@ router.get('/profile/alumni/me',AlumniAuth,async(req,res)=>{
      if(!profile){
          throw new Error('create a profile first');
      }
+     await profile.populate('alumni').execPopulate();
      res.status(200).send({alumniProfile:profile});
     }catch(err){
         res.status(400).send({err:err.message});

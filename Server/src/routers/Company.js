@@ -13,6 +13,7 @@ const sgMail=require('@sendgrid/mail');
 const ContestRanking=require('../models/ContestRankings');
 const {check,validationResult}=require('express-validator');
 const bcrypt=require('bcrypt');
+const e = require('express');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 var route_email=process.env.FORGOT_EMAIL_USER_ROUTE;
 //forgot password
@@ -85,20 +86,21 @@ check('name','name is required')
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         res.status(400).send({err:errors.array()})
-    }
-    try {
-        const {name,email,password}=req.body;
-        const temp = new TempCompany({
-            name:name,
-            password:password,
-            email:email
-        });
-       await temp.save();
-        let temp1=temp;
-        temp1.password=undefined;
-        res.status(201).send({company:temp1});
-    } catch (err) {
-        res.status(400).send({ err: err.message });
+    }else{
+        try {
+            const {name,email,password}=req.body;
+            const temp = new TempCompany({
+                name:name,
+                password:password,
+                email:email
+            });
+           await temp.save();
+            let temp1=temp;
+            temp1.password=undefined;
+            res.status(201).send({company:temp1});
+        } catch (err) {
+            res.status(400).send({ err: err.message });
+        }
     }
 })
 
@@ -175,6 +177,18 @@ router.get('/job/:id/appliedUser',companyAuth,async(req,res)=>{
       const job=await JobPost.find({_id:req.params.id,Author:req.user._id}).populate({path:'appliedUsers',populate:{
           path:'user'
       }}).exec();
+      job.forEach((j)=>{
+        if(j.appliedUsers){
+            j.appliedUsers=j.appliedUsers.map((user)=>{
+                if(user.user!=null &&user!=undefined &&user.user!=undefined){
+                    return user;
+                }
+            })
+            if(j.appliedUsers[0]==null){
+                j.appliedUsers=undefined;
+            }
+        }
+    })
       res.status(200).send(job);
     }catch(err){
         res.status(400).send({err:err.message});
@@ -188,6 +202,18 @@ router.get('/job/myJobsPost',companyAuth,async(req,res)=>{
         const job=await JobPost.find({Author:req.user._id}).populate({path:'appliedUsers',populate:{
             path:'user'
         }}).exec();
+        job.forEach((j)=>{
+            if(j.appliedUsers){
+                j.appliedUsers=j.appliedUsers.map((user)=>{
+                    if(user.user!=null &&user!=undefined &&user.user!=undefined){
+                        return user;
+                    }
+                })
+                if(j.appliedUsers[0]==null){
+                    j.appliedUsers=undefined;
+                } 
+            }
+        })
         res.status(200).send(job);
     }
     catch(err){
@@ -200,7 +226,8 @@ router.get('/job/myJobsPost',companyAuth,async(req,res)=>{
 //verified
 router.get('/company/search/user',companyAuth,async(req,res)=>{
     try{
-      const user=await User.find({name:new RegExp(req.query.search,'i')});
+        let search=req.query.search.toLowerCase()
+      const user=await User.find({name:new RegExp(search,'i')});
       res.status(200).send({user});
     }catch(err){
         res.status(400).send({err:err.message});

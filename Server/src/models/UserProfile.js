@@ -33,6 +33,7 @@ const UserProfileSchema = new mongoose.Schema({
     codeforceusername:{
         type:String,
     },
+    achievements:[String],
     experience: [
         {
             title: {

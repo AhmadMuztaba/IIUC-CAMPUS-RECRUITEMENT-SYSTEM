@@ -124,7 +124,7 @@ router.get('/blog/user/all/user',auth,async(req,res)=>{
     if(req.query.page){
         page=req.query.page;
     }
-       const blogs=await UserBlog.find({}).populate('Author').limit(10).sort({createdAt:-1}).skip(page*10);
+       const blogs=await UserBlog.find({}).populate('Author').limit(5).sort({createdAt:-1}).skip(page*5);
        res.status(200).send({blogs});
     }catch(err){
         res.status(400).send({err:err.message})
@@ -196,7 +196,7 @@ router.get('/blog/alumni/all/user',auth,async(req,res)=>{
     if(req.query.page){
         page=req.query.page;
     }
-       const blogs=await AlumniBlog.find({}).limit(10).sort({createdAt:1}).skip(page*10).populate('Author');
+       const blogs=await AlumniBlog.find({}).limit(5).sort({createdAt:1}).skip(page*5).populate('Author');
        res.status(200).send({blogs});
     }catch(err){
         res.status(400).send({err:err.message})
@@ -468,31 +468,32 @@ check('password','minimum 6 letters password required').isLength({min:6})
      const errors=validationResult(req);
      if(!errors.isEmpty()){
          res.status(400).json({err:errors.array()})
-     }
-    try {
-        const {name,email,password}=req.body;
-        const user=new TemporaryUser({
-            name:name,
-            email:email,
-            password:password
-        })
-        await user.save();
-        // const msg = {
-        //     to: `${user.email}`, // Change to your recipient
-        //     from: 'a.m.ahmadmuztaba@gmail.com', // Change to your verified sender
-        //     subject: 'New Account creater for this account',
-        //     text: 'welcome',
-        //   }
-        //  const sent=await sgMail.send(msg);
-        //  if(!sent){
-        //     console.log('mail can\'t be sent');
-        // }
-        res.status(201).send('Your request has been transferred to the admin');
-    }
-    catch (err) {
+     }else{
+        try {
+            const {name,email,password}=req.body;
+            const user=new TemporaryUser({
+                name:name,
+                email:email,
+                password:password
+            })
+            await user.save();
+            // const msg = {
+            //     to: `${user.email}`, // Change to your recipient
+            //     from: 'a.m.ahmadmuztaba@gmail.com', // Change to your verified sender
+            //     subject: 'New Account creater for this account',
+            //     text: 'welcome',
+            //   }
+            //  const sent=await sgMail.send(msg);
+            //  if(!sent){
+            //     console.log('mail can\'t be sent');
+            // }
+            res.status(201).send('Your request has been transferred to the admin');
+     }catch (err) {
         console.log(err.message);
         res.status(400).send({ err: err.message });
     }
+    }
+    
 })
 
 

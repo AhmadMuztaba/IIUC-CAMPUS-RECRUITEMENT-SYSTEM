@@ -98,7 +98,7 @@ router.get('/search/alumni',AlumniAuth,async(req,res)=>{
         const alumni=await Alumni.find({name:new RegExp(req.query.search,'i')});
         res.status(200).send({alumni});
     }catch(err){
-
+        res.status(400).send({err:err.message});
     }
 })
 
@@ -218,7 +218,7 @@ router.get('/blog/alumni/all/alumni',AlumniAuth,async(req,res)=>{
     }
        const blogs=await AlumniBlog.find({}).populate({
            path:'Author'
-       }).limit(10).sort({createdAt:-1}).skip(page*10);
+       }).limit(5).sort({createdAt:-1}).skip(page*5);
        res.status(200).send({blogs});
     }catch(err){
         res.status(400).send({err:err.message})
@@ -281,7 +281,7 @@ router.get('/blog/user/all/alumni',AlumniAuth,async(req,res)=>{
     if(req.query.page){
         page=req.query.page;
     }
-       const blogs=await UserBlog.find({}).populate('Author').limit(10).sort({createdAt:-1}).skip(page*10);
+       const blogs=await UserBlog.find({}).populate('Author').limit(5).sort({createdAt:-1}).skip(page*5);
        res.status(200).send({blogs});
     }catch(err){
         res.status(400).send({err:err.message})
@@ -397,18 +397,19 @@ check('name','name is required')
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         res.status(400).send({err:errors.array()})
-    }
-    try {
-        const {name,email,password}=req.body;
-        const temp = new TempAlumni({
-            name:name,
-            email:email,
-            password:password
-        });
-        await temp.save();
-        res.status(201).send(temp);
-    } catch (err) {
-        res.status(400).send({ err: err.message });
+    }else{
+        try {
+            const {name,email,password}=req.body;
+            const temp = new TempAlumni({
+                name:name,
+                email:email,
+                password:password
+            });
+            await temp.save();
+            res.status(201).send(temp);
+        } catch (err) {
+            res.status(400).send({ err: err.message });
+        }
     }
 })
 
