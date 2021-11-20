@@ -184,11 +184,17 @@ router.post('/profile/me', auth, async (req, res) => {
             }
             if (skills) {
                 profile.skills = skills.split(',').map((skill) => {
-                    return skill.trim().toLowerCase();
+                    if(skill!=null ||skill!==undefined){
+                        return skill.trim().toLowerCase();
+                    }
                 });
             }
             if(achievements){
-                profile.achievements=achievements;
+                profile.achievements=achievements.split(',').map((achievement)=>{
+                    if(achievement!==null ||achievement!==undefined){
+                        return achievement;
+                    }
+                });
             }
             profile.social = {};
             if (youtube) {
@@ -400,7 +406,11 @@ router.patch('/profile/me', auth, async (req, res) => {
             userprofile.location = location;
         }
         if(achievements){
-            userprofile.achievements=achievements;
+            userprofile.achievements=achievements.split(',').map((achievement)=>{
+                if(achievement!==null ||achievement!==undefined){
+                    return achievement;
+                }
+            });
         }
         if (status) {
             userprofile.status = status;
@@ -419,7 +429,9 @@ router.patch('/profile/me', auth, async (req, res) => {
         }
         if (skills) {
             userprofile.skills = skills.split(',').map((skill) => {
-                return skill.trim().toLowerCase();
+                if(skill!==null ||skill!==undefined){
+                    return skill.trim().toLowerCase();
+                }
             });
         }
         if (youtube) {
